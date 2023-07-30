@@ -22,9 +22,9 @@ class SettingsSubscriber implements EventSubscriberInterface
 {
     protected $cache;
 
-    public function __construct(CacheItemPoolInterface $lotgdBundlePackageCache)
+    public function __construct(CacheItemPoolInterface $idmSettingsBundlePackageCache)
     {
-        $this->cache = $lotgdBundlePackageCache;
+        $this->cache = $idmSettingsBundlePackageCache;
     }
 
     public function onCreateSetting(SettingsEvent $event)
