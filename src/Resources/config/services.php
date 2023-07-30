@@ -30,7 +30,7 @@ return static function (ContainerConfigurator $container)
             ->tag('doctrine.orm.entity_listener',['event' => 'postRemove', 'entity' => Setting::class, 'lazy' => true])
 
         ->set(SettingsSubscriber::class)
-            ->args([new ReferenceConfigurator('idm.bundle.settings.cache')])
+            ->args([new ReferenceConfigurator('idm.settings_bundle.package.cache')])
             ->tag('kernel.event_subscriber')
     ;
 };
