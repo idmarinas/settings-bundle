@@ -31,5 +31,6 @@ class IdmSettingsExtension extends Extension
         $loader = new PhpFileLoader($container, new FileLocator(dirname(__DIR__).'/Resources/config/prepend'));
 
         $loader->load('doctrine.php');
+        $loader->load('cache.php');
     }
 }
