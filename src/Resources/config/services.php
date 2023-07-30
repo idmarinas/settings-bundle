@@ -13,6 +13,8 @@
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Idm\Bundle\Settings\Entity\Setting;
+use Idm\Bundle\Settings\EntityListener\SettingListener;
+use Idm\Bundle\Settings\EventSubscriber\SettingsSubscriber;
 
 return static function (ContainerConfigurator $container)
 {
