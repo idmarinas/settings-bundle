@@ -14,7 +14,7 @@ namespace Idm\Bundle\Settings\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Idm\Bundle\Settings\Entity\SettingDomain;
+use Idm\Bundle\Settings\Model\SettingDomain;
 
 /**
  * @method SettingDomain|null find($id, $lockMode = null, $lockVersion = null)

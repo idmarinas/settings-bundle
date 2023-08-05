@@ -15,7 +15,7 @@ namespace Idm\Bundle\Settings\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
-use Idm\Bundle\Settings\Entity\Setting;
+use Idm\Bundle\Settings\Model\Setting;
 use Idm\Bundle\Settings\IdmSettingCache;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Cache\ItemInterface;
