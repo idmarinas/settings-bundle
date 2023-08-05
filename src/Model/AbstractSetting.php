@@ -29,7 +29,7 @@ abstract class AbstractSetting
     #[ORM\Column(type: 'string')]
     protected ?string $name = null;
 
-    #[ORM\ManyToOne(targetEntity: SettingDomain::class, inversedBy: 'settings')]
+    #[ORM\ManyToOne(targetEntity: AbstractSettingDomain::class, inversedBy: 'settings')]
     #[ORM\JoinColumn(referencedColumnName: 'uuid', nullable: false)]
     protected ?AbstractSettingDomain $domain = null;
 

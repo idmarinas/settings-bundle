@@ -102,7 +102,7 @@ abstract class AbstractSettingDomain
     }
 
     /**
-     * @return Collection|Setting[]
+     * @return Collection|AbstractSetting[]
      */
     public function getSettings(): Collection
     {
