@@ -10,41 +10,38 @@
  * @since 1.0.0
  */
 
-namespace Idm\Bundle\Settings\Entity;
+namespace Idm\Bundle\Settings\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 use Idm\Bundle\Settings\Repository\SettingDomainRepository;
 
 /** Domain for settings of Symfony App */
+#[ORM\Table(name: 'settings_setting_domain')]
 #[ORM\Entity(repositoryClass: SettingDomainRepository::class)]
-#[Gedmo\SoftDeleteable(fieldName: 'deletedAt', timeAware: false, hardDelete: true)]
-class SettingDomain
+abstract class SettingDomain
 {
     use UuidTrait;
-    use SoftDeleteableEntity;
 
     public const DEFAULT_NAME = 'default';
 
     #[ORM\Column(type: Types::STRING, unique: true)]
-    private string $name = '';
+    protected string $name = '';
 
     #[ORM\Column(type: Types::INTEGER)]
-    private int $priority = 0;
+    protected int $priority = 0;
 
     #[ORM\Column(type: Types::BOOLEAN)]
-    private bool $enabled = false;
+    protected bool $enabled = false;
 
     #[ORM\Column(type: Types::BOOLEAN)]
-    private bool $readOnly = false;
+    protected bool $readOnly = false;
 
     #[ORM\OneToMany(targetEntity: Setting::class, mappedBy: 'domain')]
-    private ArrayCollection $settings;
+    protected ArrayCollection $settings;
 
     public function __construct()
     {
