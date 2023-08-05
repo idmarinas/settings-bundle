@@ -22,7 +22,7 @@ use Idm\Bundle\Settings\Repository\SettingDomainRepository;
 /** Domain for settings of Symfony App */
 #[ORM\Table(name: 'settings_setting_domain')]
 #[ORM\Entity(repositoryClass: SettingDomainRepository::class)]
-abstract class SettingDomain
+abstract class AbstractSettingDomain
 {
     use UuidTrait;
 
@@ -40,7 +40,7 @@ abstract class SettingDomain
     #[ORM\Column(type: Types::BOOLEAN)]
     protected bool $readOnly = false;
 
-    #[ORM\OneToMany(targetEntity: Setting::class, mappedBy: 'domain')]
+    #[ORM\OneToMany(targetEntity: AbstractSetting::class, mappedBy: 'domain')]
     protected ArrayCollection $settings;
 
     public function __construct()
@@ -109,7 +109,7 @@ abstract class SettingDomain
         return $this->settings;
     }
 
-    public function addSetting(Setting $setting): self
+    public function addSetting(AbstractSetting $setting): self
     {
         if ( ! $this->settings->contains($setting))
         {
@@ -120,7 +120,7 @@ abstract class SettingDomain
         return $this;
     }
 
-    public function removeSetting(Setting $setting): self
+    public function removeSetting(AbstractSetting $setting): self
     {
         if ($this->settings->removeElement($setting) && $setting->getDomain() === $this)
         {

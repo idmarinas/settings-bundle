@@ -15,7 +15,7 @@ namespace Idm\Bundle\Settings\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
-use Idm\Bundle\Settings\Model\Setting;
+use Idm\Bundle\Settings\Model\AbstractSetting;
 use Idm\Bundle\Settings\IdmSettingCache;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -33,16 +33,16 @@ class SettingRepository extends ServiceEntityRepository
 
     public function __construct(ManagerRegistry $registry, TagAwareCacheInterface $idmSettingsBundlePackageCache)
     {
-        parent::__construct($registry, Setting::class);
+        parent::__construct($registry, AbstractSetting::class);
 
         $this->cache = $idmSettingsBundlePackageCache;
     }
 
-    public function getSettingObject(string $name, ?UserInterface $user = null): ?Setting
+    public function getSettingObject(string $name, ?UserInterface $user = null): ?AbstractSetting
     {
         $collection = $this->getCollectionSettings();
 
-        $setting = $collection->filter(function (Setting $item) use ($name, $user) {
+        $setting = $collection->filter(function (AbstractSetting $item) use ($name, $user) {
             return $item->getName() == $name && $this->checkUserIsEqual($item->getUser(), $user);
         })->first();
 
@@ -71,7 +71,7 @@ class SettingRepository extends ServiceEntityRepository
     {
         $collection = $this->getCollectionSettings();
 
-        $setting = $collection->filter(function (Setting $item) use ($domain, $name, $user) {
+        $setting = $collection->filter(function (AbstractSetting $item) use ($domain, $name, $user) {
             return $item->getDomain()->getName() == $domain
                 && $item->getName()              == $name
                 && $this->checkUserIsEqual($item->getUser(), $user);

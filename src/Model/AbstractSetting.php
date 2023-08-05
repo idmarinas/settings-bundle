@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
     new ORM\UniqueConstraint(name: 'idm_settings_bundle_setting', columns: ['domain_id', 'name', 'user_id'])
 ])]
 #[ORM\Entity(repositoryClass: SettingRepository::class)]
-abstract class Setting
+abstract class AbstractSetting
 {
     use UuidTrait;
 
@@ -31,7 +31,7 @@ abstract class Setting
 
     #[ORM\ManyToOne(targetEntity: SettingDomain::class, inversedBy: 'settings')]
     #[ORM\JoinColumn(referencedColumnName: 'uuid', nullable: false)]
-    protected ?SettingDomain $domain = null;
+    protected ?AbstractSettingDomain $domain = null;
 
     #[ORM\Column(type: 'string', length: 1000)]
     protected string $description = '';
@@ -99,12 +99,12 @@ abstract class Setting
         return $this;
     }
 
-    public function getDomain(): ?SettingDomain
+    public function getDomain(): ?AbstractSettingDomain
     {
         return $this->domain;
     }
 
-    public function setDomain(?SettingDomain $domain): static
+    public function setDomain(?AbstractSettingDomain $domain): static
     {
         $this->domain = $domain;
 

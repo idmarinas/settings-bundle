@@ -14,7 +14,7 @@ namespace Idm\Bundle\Settings\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Idm\Bundle\Settings\Model\SettingDomain;
+use Idm\Bundle\Settings\Model\AbstractSettingDomain;
 
 /**
  * @method SettingDomain|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,6 +26,6 @@ class SettingDomainRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, SettingDomain::class);
+        parent::__construct($registry, AbstractSettingDomain::class);
     }
 }
