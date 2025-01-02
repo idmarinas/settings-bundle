@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 02/01/2025, 23:01
+ * Last modified by "IDMarinas" on 02/01/2025, 23:13
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -17,7 +17,7 @@
  * @since   1.0.0
  */
 
-namespace Idm\Bundle\Settings;
+namespace Idm\Bundle\Settings\Cache;
 
 enum CacheKeyEnum: string
 {
