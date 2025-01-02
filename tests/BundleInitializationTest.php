@@ -3,7 +3,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 02/01/2025, 22:55
+ * Last modified by "IDMarinas" on 03/01/2025, 24:03
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -20,6 +20,8 @@
 
 namespace Idm\Bundle\Settings\Tests;
 
+use Idm\Bundle\Settings\Cache\SettingsCacheEncryptInterface;
+use Idm\Bundle\Settings\Cache\SettingsCacheInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class BundleInitializationTest extends KernelTestCase
@@ -27,8 +29,16 @@ final class BundleInitializationTest extends KernelTestCase
 	public function testInitBundle (): void
 	{
 		// Boot the kernel.
-		static::bootKernel();
+		self::bootKernel();
 
 		$this->assertTrue(true);
+
+		$container = self::getContainer();
+
+		$this->assertArrayHasKey('idm_settings.service.cache.adapter.settings', $container->getRemovedIds());
+		$this->assertArrayHasKey('idm_settings.service.cache.adapter.settings.encrypt', $container->getRemovedIds());
+
+		$this->assertTrue($container->has(SettingsCacheInterface::class));
+		$this->assertTrue($container->has(SettingsCacheEncryptInterface::class));
 	}
 }
