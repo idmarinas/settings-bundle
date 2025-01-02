@@ -6,7 +6,7 @@ on:
     tags-ignore: [ dependencies, documentation ]
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - '.deployer/**'
       - '.docker/**'
