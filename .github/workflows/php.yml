@@ -1,10 +1,27 @@
-name: Test Suite
+name: IDMarinas Settings Bundle Test Suite
 
 on:
   pull_request:
+    types: [ opened, synchronize, reopened ]
+    tags-ignore: [ dependencies, documentation ]
   push:
     branches:
       - master
+    paths-ignore:
+      - '.deployer/**'
+      - '.docker/**'
+      - 'migrations/**'
+      - '**/docs/**'
+      - '**/Writerside/**'
+      - '**/README.md'
+      - '**/COMMANDS.md'
+      - '**/TIPS.md'
+      - '**/TODO.md'
+      - '**/LICENSE'
+      - rector.php
+      - .editorconfig
+      - .gitignore
+      - compose.yaml
 
 jobs:
   build:
@@ -13,19 +30,13 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php: [ '8.1', '8.2' ]
-        symfony: ['4.4.*', '5.4.*', '6.1.*', '6.2.*', '6.3.*']
-
-        # exclude:
-        #   - php: '8.0'
-        #     symfony: '6.1.*'
-        #   - php: '8.0'
-        #     symfony: '6.2.*'
-        #   - php: '8.0'
-        #     symfony: '6.3.*'
+        php: [ '8.2', '8.3', '8.4' ]
+        symfony: [ '6.4.*', '7.0.*', '7.1.*', '7.2.*' ]
 
     steps:
       - uses: actions/checkout@master
+        with:
+          fetch-depth: ${{ (matrix.php == '8.2' && matrix.symfony == '6.4.*') && '0' || '1' }}
 
       - name: Setup PHP ${{ matrix.php }}
         uses: shivammathur/setup-php@v2
@@ -36,7 +47,19 @@ jobs:
       - name: Download dependencies
         env:
           SYMFONY_REQUIRE: ${{ matrix.symfony }}
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
 
       - name: Run test suite on PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}
-        run: ./vendor/bin/phpunit
+        run: ./vendor/bin/phpunit --exclude ignore
+
+      - name: Fix paths for Sonar
+        if: matrix.php == '8.2' && matrix.symfony == '6.4.*'
+        working-directory: ./build/reports/
+        run: sed -i 's/\/home\/runner\/work\/settings-bundle\/settings-bundle\//\/github\/workspace\//g' phpunit.coverage.xml
+
+      - name: SonarCloud Scan
+        if: matrix.php == '8.2' && matrix.symfony == '6.4.*'
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
