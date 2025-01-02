@@ -1,38 +1,51 @@
 <?php
+/**
+ * Copyright 2025 (C) IDMarinas - All Rights Reserved
+ *
+ * Last modified by "IDMarinas" on 02/01/2025, 22:24
+ *
+ * @project IDMarinas Settings Bundle
+ * @see https://github.com/idmarinas/settings-bundle
+ *
+ * @file rector.php
+ * @date 02/01/2025
+ * @time 22:24
+ *
+ * @author Iván Diaz Marinas (IDMarinas)
+ * @license BSD 3-Clause License
+ *
+ * @since 1.0.0
+ */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
-use Rector\CodeQuality\Rector\Array_\CallableThisArrayToAnonymousFunctionRector;
-use Rector\CodeQuality\Rector\If_\ShortenElseIfRector;
-use Rector\CodeQuality\Rector\Include_\AbsolutizeRequireAndIncludePathRector;
 use Rector\Config\RectorConfig;
-use Rector\Core\ValueObject\PhpVersion;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Set\ValueObject\SetList;
-use Rector\Symfony\Set\SymfonyLevelSetList;
 use Rector\Symfony\Set\SymfonySetList;
+use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 
-return static function (RectorConfig $rectorConfig): void
-{
-    $rectorConfig->paths([
-        __DIR__.'/src',
-        __DIR__.'/tests',
-    ]);
-
-    $rectorConfig->phpVersion(PhpVersion::PHP_81);
-    $rectorConfig->importNames(true, false);
-
-    $rectorConfig->import(SetList::DEAD_CODE);
-    $rectorConfig->import(SetList::CODE_QUALITY);
-    $rectorConfig->import(LevelSetList::UP_TO_PHP_81);
-    $rectorConfig->import(SetList::PHP_82);
-
-    // -- Symfony Framework
-    $rectorConfig->import(SymfonyLevelSetList::UP_TO_SYMFONY_44);
-    $rectorConfig->import(SymfonySetList::SYMFONY_CODE_QUALITY);
-
-    // -- Skip some rules/files ...
-    // $rectorConfig->skip([
-    //     ShortenElseIfRector::class,
-    // ]);
-};
+return RectorConfig::configure()
+	->withPaths([
+		__DIR__ . '/app/src',
+		__DIR__ . '/factories',
+		__DIR__ . '/fixtures',
+		__DIR__ . '/src',
+		__DIR__ . '/tests',
+	])
+	->withPhpSets(php82: true)
+	->withPreparedSets(
+		deadCode           : true,
+		codeQuality        : true,
+		codingStyle        : true,
+		doctrineCodeQuality: true,
+		symfonyCodeQuality : true,
+		symfonyConfigs     : true,
+		twig               : true
+	)
+	->withImportNames(removeUnusedImports: true)
+	->withTypeCoverageLevel(0)
+	->withSets([
+		SymfonySetList::SYMFONY_64,
+		SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
+	])
+	->withRules([AddVoidReturnTypeWhereNoReturnRector::class])
+;
