@@ -1,4 +1,4 @@
 dependencies:
-  - any: ['composer.json', 'composer.lock']
+  - any: [ 'composer.json', 'composer.lock', 'package.json', 'package-lock.json' ]
 documentation:
   - 'docs/**/*'
