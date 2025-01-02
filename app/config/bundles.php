@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 02/01/2025, 21:58
+ * Last modified by "IDMarinas" on 02/01/2025, 22:54
  *
  * @project IDMarinas Settings Bundle
  * @see https://github.com/idmarinas/settings-bundle
@@ -27,7 +27,7 @@ use Zenstruck\Foundry\ZenstruckFoundryBundle;
 return [
 	FrameworkBundle::class        => ['all' => true],
 	DoctrineBundle::class         => ['all' => true],
-	IdmTemplateBundle::class      => ['all' => true],
+	IdmSettingsBundle::class      => ['all' => true],
 
 	// Dev-Test Bundles
 	DoctrineFixturesBundle::class => ['all' => true],
