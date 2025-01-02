@@ -2,19 +2,19 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 02/01/2025, 21:58
+ * Last modified by "IDMarinas" on 02/01/2025, 23:34
  *
  * @project IDMarinas Settings Bundle
- * @see https://github.com/idmarinas/settings-bundle
+ * @see     https://github.com/idmarinas/settings-bundle
  *
- * @file Kernel.php
- * @date 02/01/2025
- * @time 20:33
+ * @file    Kernel.php
+ * @date    02/01/2025
+ * @time    20:33
  *
- * @author Iván Diaz Marinas (IDMarinas)
+ * @author  Iván Diaz Marinas (IDMarinas)
  * @license BSD 3-Clause License
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 namespace App;
@@ -57,7 +57,7 @@ final class Kernel extends BaseKernel
 		$loader->load($this->getTestPackagesConfigDir() . '/doctrine.php');
 
 		// Load service of Bundle
-		$loader->load($this->getTestConfigDir() . '/service.php');
+		$loader->load($this->getTestConfigDir() . '/services.php');
 
 		// Load Fixtures and Factories of Bundle
 		$loader->load($this->getConfigDir() . '/factories.php');
