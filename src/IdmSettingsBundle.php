@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 03/01/2025, 22:49
+ * Last modified by "IDMarinas" on 04/01/2025, 24:28
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -39,16 +39,13 @@ final class IdmSettingsBundle extends AbstractBundle
 					->defaultValue(
 						base64_decode('A8sxOR+h35ollRFbQ3KzMDp1gBRbn0UZA0kRjclWRChFgNOF9KTcWg1GNV2rHwnT+0xO3h5Kexpq8MSN+mpOBA==')
 					)
-					->validate()
+					->beforeNormalization()
 						->ifString()
-						->then(function ($v) {
-							$key = base64_decode($v, true);
-							$key = is_string($key) ? $key : $v;
-							$valid = $this->sodiumKeypairValid($key);
-
-							return $valid ? $key : null;
-						})
-						->ifNull()->thenInvalid('Invalid cache key')
+						->then(fn ($v) => base64_decode($v, true))
+					->end()
+					->validate()
+						->ifTrue(fn ($v) => ! $this->sodiumKeypairValid($v))
+						->thenInvalid('Invalid "sodium_crypto_box_keypair"')
 					->end()
 				->end()
 			->end()
