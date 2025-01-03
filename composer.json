@@ -2,7 +2,11 @@
 	"name": "idmarinas/settings-bundle",
 	"type": "symfony-bundle",
 	"license": "BSD-3-Clause",
-	"keywords": ["symfony-bundle", "settings-bundle", "user-settings"],
+	"keywords": [
+		"symfony-bundle",
+		"settings-bundle",
+		"user-settings"
+	],
 	"homepage": "https://github.com/idmarinas/settings-bundle",
 	"authors": [
 		{
@@ -18,6 +22,7 @@
 	"prefer-stable": true,
 	"require": {
 		"php": "^8.2",
+		"ext-sodium": "*",
 		"symfony/cache": "^6.4 | ^7.0",
 		"symfony/dependency-injection": "^6.4 | ^7.0",
 		"symfony/framework-bundle": "^6.4 | ^7.0"
