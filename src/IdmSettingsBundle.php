@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 04/01/2025, 24:28
+ * Last modified by "IDMarinas" on 04/01/2025, 24:47
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -32,6 +32,7 @@ final class IdmSettingsBundle extends AbstractBundle
 		// @formatter:off
 		$definition->rootNode()
 			->children()
+				// TODO: convert to an array to add more than 1 key
 				->scalarNode('cache_sodium_keypair')
 					->info('key must be generated using sodium_crypto_box_keypair() and encode with base64_encode')
 					->cannotBeOverwritten()
