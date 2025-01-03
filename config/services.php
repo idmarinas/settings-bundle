@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 03/01/2025, 24:11
+ * Last modified by "IDMarinas" on 03/01/2025, 22:50
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -40,7 +40,8 @@ return function (ContainerConfigurator $container) {
 			->public()
 
 		->set('idm_settings.cache.sodium_marshaller', SodiumMarshaller::class)
-			->args([[param('cache_decryption_key')], service('cache.default_marshaller')])
+			->args([[param('idm_settings.parameter.cache_keypair')], service('cache.default_marshaller')])
+			->private()
 	;
 	// @formatter::on
 };
