@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 02/01/2025, 23:57
+ * Last modified by "IDMarinas" on 03/01/2025, 19:40
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -30,10 +30,20 @@ final class Kernel extends BaseKernel
 {
 	use MicroKernelTrait;
 
+	private array $extraBundles = [];
+	private array $extraRoutes  = [];
+	private array $extraConfig  = [];
+
 	public function configureRoutes (RoutingConfigurator $routes): void
 	{
 		$routes->import($this->getConfigDir() . '/routes.php');
 //		$routes->import('security.route_loader.logout', 'service')->methods(['GET']);
+
+		$extraRoutes = array_unique($this->extraRoutes);
+
+		foreach ($extraRoutes as $route) {
+			$routes->import($route);
+		}
 
 		$routes
 			->add('app_home', '/')
@@ -43,6 +53,80 @@ final class Kernel extends BaseKernel
 			//	'template' => 'path/to/template.html.twig',
 			//])
 		;
+	}
+
+	public function addExtraBundle (string $bundleName): self
+	{
+		$this->extraBundles[$bundleName] = ['all' => true];
+
+		return $this;
+	}
+
+	public function addExtraConfigFile (string $config): self
+	{
+		$this->extraConfig[] = $config;
+
+		return $this;
+	}
+
+	public function addExtraRoutesFile (string $route): self
+	{
+		$this->extraRoutes[] = $route;
+
+		return $this;
+	}
+
+	public function registerBundles (): iterable
+	{
+		$contents = require $this->getBundlesPath();
+		$contents = array_merge($contents, $this->extraBundles);
+
+		foreach ($contents as $class => $envs) {
+			if ($envs[$this->environment] ?? $envs['all'] ?? false) {
+				yield new $class();
+			}
+		}
+	}
+
+	/**
+	 * For add more config/routes/bundles to kernel
+	 *
+	 * <code>
+	 *   <?php
+	 *    use Symfony\Bundle\FrameworkBundle\Test\{
+	 *      KernelTestCase,
+	 *      WebTestCase
+	 *    };
+	 *
+	 *    class TestKernel extends [(KernelTestCase|WebTestCase)]
+	 *    {
+	 *      public function testAnything (): void
+	 *      {
+	 *        $kernel = self::bootKernel([
+	 *          'config' => static function (Kernel $kernel) {
+	 *            $kernel->addExtraBundle(BundleName::class);
+	 *            $kernel->addExtraConfigFile('path/to/file.php');
+	 *            $kernel->addExtraRoutesFile('path/to/file.php');
+	 *          }
+	 *        ]);
+	 *      }
+	 *
+	 *      #[Override]
+	 *      protected static function createKernel (array $options = []): KernelInterface
+	 *      {
+	 *        $kernel = parent::createKernel($options);
+	 *        $kernel->handleOptions($options);
+	 *
+	 *        return $kernel;
+	 *      }
+	 *    }
+	 * </code>
+	 */
+	public function handleOptions (array $options): void
+	{
+		if (array_key_exists('config', $options) && is_callable($config = $options['config'])) {
+			$config($this);
+		}
 	}
 
 	/**
@@ -62,6 +146,12 @@ final class Kernel extends BaseKernel
 		// Load Fixtures and Factories of Bundle
 		$loader->load($this->getConfigDir() . '/factories.php');
 		$loader->load($this->getConfigDir() . '/fixtures.php');
+
+		$extraConfig = array_unique($this->extraConfig);
+
+		foreach ($extraConfig as $config) {
+			$loader->load($config);
+		}
 	}
 
 	private function getBundlesPath (): string
