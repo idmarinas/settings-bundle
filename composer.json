@@ -35,6 +35,7 @@
 		"symfony/console": "^6.4 | ^7.0",
 		"symfony/phpunit-bridge": "^7.2",
 		"symfony/runtime": "^6.4 | ^7.0",
+		"symfony/yaml": "^6.4 | ^7.0",
 		"twig/twig": "^3.16",
 		"zenstruck/foundry": "^2.3"
 	},
