@@ -1,25 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="MessDetector">
-    <phpmd_settings>
-      <phpmd_by_interpreter asDefaultInterpreter="true" interpreter_id="56b53453-b60c-4446-8e36-00bc696a53b7" timeout="30000" />
-    </phpmd_settings>
-  </component>
-  <component name="MessDetectorOptionsConfiguration">
-    <option name="transferred" value="true" />
-  </component>
-  <component name="PHPCSFixerOptionsConfiguration">
-    <option name="transferred" value="true" />
-  </component>
-  <component name="PHPCodeSnifferOptionsConfiguration">
-    <option name="highlightLevel" value="WARNING" />
-    <option name="transferred" value="true" />
-  </component>
-  <component name="PhpCodeSniffer">
-    <phpcs_settings>
-      <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="56b53453-b60c-4446-8e36-00bc696a53b7" timeout="30000" />
-    </phpcs_settings>
-  </component>
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/rector/rector" />
@@ -84,58 +64,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/vendor/twig/twig" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/seld/phar-utils" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/seld/signal-handler" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/react/promise" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/justinrainbow/json-schema" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/filesystem" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/composer" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/process" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/seld/jsonlint" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/polyfill-php81" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/validator" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/polyfill-php83" />
-      <path value="$PROJECT_DIR$/bundles/composer-plugin/vendor/symfony/lock" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/react/promise" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/justinrainbow/json-schema" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/validator" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/composer" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/seld/phar-utils" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/seld/signal-handler" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/translation-contracts" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/polyfill-php83" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/lock" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/filesystem" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/process" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/seld/jsonlint" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/polyfill-php81" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/bundles.dist/composer-plugin/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
       <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
@@ -158,6 +86,7 @@
       <path value="$PROJECT_DIR$/vendor/fakerphp/faker" />
       <path value="$PROJECT_DIR$/vendor/symfony/phpunit-bridge" />
       <path value="$PROJECT_DIR$/vendor/dama/doctrine-test-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
@@ -334,11 +263,6 @@
       <extension name="zend" enabled="false" />
       <extension name="zmq" enabled="false" />
     </extensions>
-  </component>
-  <component name="PhpStan">
-    <PhpStan_settings>
-      <PhpStanConfiguration tool_path="$PROJECT_DIR$/vendor/bin/phpstan" />
-    </PhpStan_settings>
   </component>
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
