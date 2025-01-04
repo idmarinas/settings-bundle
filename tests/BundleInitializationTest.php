@@ -3,7 +3,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 04/01/2025, 24:48
+ * Last modified by "IDMarinas" on 04/01/2025, 11:47
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -40,11 +40,7 @@ final class BundleInitializationTest extends KernelTestCase
 	public function testInitBundle (): void
 	{
 		// Boot the kernel.
-		self::bootKernel([
-			'config' => static function (Kernel $kernel) {
-				$kernel->addExtraConfig(__DIR__ . '/config/idm_settings.php');
-			},
-		]);
+		self::bootKernel();
 
 		$container = self::getContainer();
 
