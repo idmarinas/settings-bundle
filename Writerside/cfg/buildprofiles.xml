@@ -20,14 +20,14 @@
 
 		<link href="https://www.github.com/%package-name%/issues">Issues</link>
 
-		<copyright>2025-present IDMarinas</copyright>
+		<copyright>2024-present IDMarinas</copyright>
 	</footer>
 
 	<build-profile instance="isb">
 		<variables>
-            <og-twitter>@idmarinas</og-twitter>
-            <noindex-content>false</noindex-content>
-        </variables>
+			<og-twitter>@idmarinas</og-twitter>
+			<noindex-content>false</noindex-content>
+		</variables>
 	</build-profile>
 
 </buildprofiles>
