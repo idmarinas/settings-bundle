@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 04/01/2025, 24:47
+ * Last modified by "IDMarinas" on 05/01/2025, 19:08
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -34,7 +34,9 @@ final class IdmSettingsBundle extends AbstractBundle
 			->children()
 				// TODO: convert to an array to add more than 1 key
 				->scalarNode('cache_sodium_keypair')
-					->info('key must be generated using sodium_crypto_box_keypair() and encode with base64_encode')
+					->info("key must be generated using sodium_crypto_box_keypair() and encode with base64_encode.\n"
+					       . 'You need generate your own keypair'
+					)
 					->cannotBeOverwritten()
 					->cannotBeEmpty()
 					->defaultValue(
@@ -78,7 +80,7 @@ final class IdmSettingsBundle extends AbstractBundle
 			$secretKey = sodium_crypto_box_secretkey($keypair);
 
 			return !empty($publicKey) && !empty($secretKey);
-		} catch (Exception $e) {
+		} catch (Exception) {
 			return false;
 		}
 	}
