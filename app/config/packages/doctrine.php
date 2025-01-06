@@ -2,19 +2,19 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 02/01/2025, 21:58
+ * Last modified by "IDMarinas" on 05/01/2025, 20:01
  *
  * @project IDMarinas Settings Bundle
- * @see https://github.com/idmarinas/settings-bundle
+ * @see     https://github.com/idmarinas/settings-bundle
  *
- * @file doctrine.php
- * @date 02/01/2025
- * @time 20:33
+ * @file    doctrine.php
+ * @date    02/01/2025
+ * @time    20:33
  *
- * @author Iván Diaz Marinas (IDMarinas)
+ * @author  Iván Diaz Marinas (IDMarinas)
  * @license BSD 3-Clause License
  *
- * @since 1.0.0
+ * @since   1.0.0
  */
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
@@ -48,12 +48,18 @@ return static function (ContainerConfigurator $container) {
 				'auto_mapping' => false,
 			],
 			'mappings'                    => [
-				'Tests' => [
+				'Tests'             => [
 					'is_bundle' => false,
 					'mapping'   => true,
 					'type'      => 'attribute',
 					'dir'       => dirname(__DIR__, 2) . '/src/Entity',
 					'prefix'    => 'App\Entity',
+				],
+				'IdmSettingsBundle' => [
+					'mapping' => true,
+					'type'    => 'attribute',
+					'dir'     => dirname(__DIR__, 3) . '/src/Entity',
+					'prefix'  => 'Idm\Bundle\Settings\Entity',
 				],
 				//'resolve_target_entities' => [
 				//	AbstractUser::class => User::class,
