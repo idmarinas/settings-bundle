@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 05/01/2025, 20:01
+ * Last modified by "IDMarinas" on 14/03/2025, 23:46
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,7 +19,10 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Idm\Bundle\Settings\IdmSettingsBundle;
+use ReflectionClass;
 use Symfony\Component\Filesystem\Filesystem;
+use function Symfony\Component\String\u;
 
 return static function (ContainerConfigurator $container) {
 	$getDatabaseCache = function (): string {
@@ -34,10 +37,13 @@ return static function (ContainerConfigurator $container) {
 		return $dir;
 	};
 
+	$dbName = (new ReflectionClass(IdmSettingsBundle::class))->getShortName();
+	$dbName = u($dbName)->snake()->toString();
+
 	$container->extension('doctrine', [
 		'dbal' => [
 			'driver'         => 'pdo_sqlite',
-			'url'            => sprintf('sqlite:///%s/idm_user_%s.sqlite', $getDatabaseCache(), $container->env()),
+			'url'            => sprintf('sqlite:///%s/%s_%s.sqlite', $getDatabaseCache(), $dbName, $container->env()),
 			'use_savepoints' => true,
 		],
 		'orm'  => [
@@ -48,18 +54,12 @@ return static function (ContainerConfigurator $container) {
 				'auto_mapping' => false,
 			],
 			'mappings'                    => [
-				'Tests'             => [
+				'Tests' => [
 					'is_bundle' => false,
 					'mapping'   => true,
 					'type'      => 'attribute',
 					'dir'       => dirname(__DIR__, 2) . '/src/Entity',
 					'prefix'    => 'App\Entity',
-				],
-				'IdmSettingsBundle' => [
-					'mapping' => true,
-					'type'    => 'attribute',
-					'dir'     => dirname(__DIR__, 3) . '/src/Entity',
-					'prefix'  => 'Idm\Bundle\Settings\Entity',
 				],
 				//'resolve_target_entities' => [
 				//	AbstractUser::class => User::class,
