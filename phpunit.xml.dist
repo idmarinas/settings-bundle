@@ -33,7 +33,7 @@
 
 		<exclude>
 			<!-- <directory>src/Repository/PatchNotes/data</directory> -->
-			<!-- <directory>src/DataFixtures</directory> -->
+			<directory>src/DataFixtures</directory>
 			<!-- <directory>src/Repository</directory> -->
 		</exclude>
 
