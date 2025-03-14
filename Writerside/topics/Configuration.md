@@ -1,3 +1,0 @@
-# Configuration
-
-Start typing here...
