@@ -2,20 +2,16 @@ name: settings_bundle
 
 services:
   php:
-    build:
-      context: .docker/php
-      target: dev
-      args:
-        VERSION: '8.2'
+    image: idmarinas/php:8.3-xdebug
     environment:
       SYMFONY_REQUIRE: '6.4.*'
     healthcheck:
       test: php -v || exit 1
     volumes:
       - ./:/var/www/html
-      ## PHP Conf
-      - ./.docker/php/conf.d/common.ini:/usr/local/etc/php/conf.d/common.ini
-      - ./.docker/php/conf.d/disable_functions.ini:/usr/local/etc/php/conf.d/disable_functions.ini
-      ## PHP Conf Dev
-      - ./.docker/php/conf.d/dev/php.ini:/usr/local/etc/php/conf.d/php.ini
-      - ./.docker/php/conf.d/dev/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini
+      ## SSH
+      - ssh_key:/root/.ssh:ro
+
+volumes:
+  ssh_key:
+    external: true
