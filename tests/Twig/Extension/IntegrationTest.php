@@ -2,26 +2,25 @@
 /**
  * Copyright 2021-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 02/01/2025, 21:58
+ * Last modified by "IDMarinas" on 14/03/2025, 23:26
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
  *
  * @file    IntegrationTest.php
- * @date    02/01/2025
- * @time    20:33
+ * @date    14/03/2025
+ * @time    21:52
  *
  * @author  Iván Diaz Marinas (IDMarinas)
  * @license BSD 3-Clause License
  *
- * @since   0.1.0
+ * @since   1.0.0
  */
 
-namespace Idm\Bundle\Settings\Tests\Extension;
+namespace Idm\Bundle\Settings\Tests\Twig\Extension;
 
-use Symfony\Component\Config\Loader\LoaderInterface;
+use App\Kernel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\Kernel;
 use Twig\Test\IntegrationTestCase;
 
 /**
@@ -43,24 +42,9 @@ final class IntegrationTest extends IntegrationTestCase
 
 	protected function getContainer (): ContainerInterface
 	{
-		$kernel = new ExtensionTestingKernel();
+		$kernel = new Kernel('test', true);
 		$kernel->boot();
 
 		return $kernel->getContainer();
 	}
-}
-
-class ExtensionTestingKernel extends Kernel
-{
-	public function __construct ()
-	{
-		parent::__construct('test', true);
-	}
-
-	public function registerBundles (): iterable
-	{
-		return [];
-	}
-
-	public function registerContainerConfiguration (LoaderInterface $loader): void {}
 }
