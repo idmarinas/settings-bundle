@@ -1,15 +1,20 @@
 name: IDMarinas Settings Bundle Test Suite
 
+permissions:
+  contents: read
+  pull-requests: write
+
 on:
   pull_request:
+    branches: [ 1.x ]
     types: [ opened, synchronize, reopened ]
-    tags-ignore: [ dependencies, documentation ]
+    tags-ignore: [ dependencies, documentation, meta, 'docker configuration', 'deployer configuration' ]
   push:
-    branches:
-      - main
+    branches: [ 1.x ]
     paths-ignore:
       - '.deployer/**'
       - '.docker/**'
+      - '.idea/**'
       - 'migrations/**'
       - '**/docs/**'
       - '**/Writerside/**'
@@ -25,16 +30,15 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: ubuntu-latest
     name: PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}
     strategy:
       matrix:
-        operating-system: [ ubuntu-latest ]
-        php: [ '8.2', '8.3', '8.4' ]
-        symfony: [ '6.4.*', '7.0.*', '7.1.*', '7.2.*' ]
+        php: [ '8.3', '8.4' ]
+        symfony: [ '6.4.*', '7.1.*', '7.2.*' ]
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
         with:
           fetch-depth: ${{ (matrix.php == '8.2' && matrix.symfony == '6.4.*') && '0' || '1' }}
 
@@ -49,9 +53,14 @@ jobs:
           SYMFONY_REQUIRE: ${{ matrix.symfony }}
         uses: ramsey/composer-install@v3
 
+      # Uncomment if you need create a SQLite Database
+      - name: Create Database SQLite
+        run: 'php bin/console doctrine:schema:create --env=test && php bin/console doctrine:fixtures:load --env=test -n'
+
       - name: Run test suite on PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}
         run: ./vendor/bin/phpunit --exclude ignore
 
+      # Uncomment to activate SonarCloud Scan
       - name: SonarCloud Scan
         if: matrix.php == '8.2' && matrix.symfony == '6.4.*'
         uses: SonarSource/sonarqube-scan-action@v4
