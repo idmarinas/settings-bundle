@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 02/01/2025, 23:24
+ * Last modified by "IDMarinas" on 15/03/2025, 24:18
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,19 +19,18 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function (ContainerConfigurator $container): void {
-	$container->extension('framework', [
-		'cache' => [
-			'pools' => [
-				'idm_settings.cache'         => [
-					'adapter' => 'idm_settings.service.cache.adapter.settings',
-					'tags'    => true,
-				],
-				'idm_settings.encrypt.cache' => [
-					'adapter' => 'idm_settings.service.cache.adapter.settings.encrypt',
-					'tags'    => true,
-				],
-			],
-		],
-	]);
+use Symfony\Config\FrameworkConfig;
+
+return static function (FrameworkConfig $config): void {
+	$config
+		->cache()
+		->pool('idm_settings.cache', [
+			'adapter' => 'idm_settings.service.cache.adapter.settings',
+			'tags'    => true,
+		])
+		->pool('idm_settings.encrypt.cache', [
+			'adapter' => 'idm_settings.service.cache.adapter.settings.encrypt',
+			'tags'    => true,
+		])
+	;
 };
