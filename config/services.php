@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 15/03/2025, 11:28
+ * Last modified by "IDMarinas" on 15/03/2025, 11:58
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -36,7 +36,7 @@ return function (ContainerConfigurator $container) {
 
 		->set('idm_settings.service.cache_adapter.settings.encrypt', FilesystemAdapter::class)
 			->private()
-			->arg('$directory', '%kernel.cache_dir%/pools/settings/encrypt')
+			->arg('$directory', '%kernel.cache_dir%/pools/settings')
 			->arg('$marshaller', service('idm_settings.cache.sodium_marshaller'))
 		->alias(SettingsCacheEncryptInterface::class, 'idm_settings.service.cache_adapter.settings.encrypt')
 			->public()
