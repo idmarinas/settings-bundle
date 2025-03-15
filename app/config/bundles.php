@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 14/03/2025, 23:45
+ * Last modified by "IDMarinas" on 15/03/2025, 11:40
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,11 +23,17 @@ use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use Idm\Bundle\Settings\IdmSettingsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MakerBundle\MakerBundle;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\UX\TwigComponent\TwigComponentBundle;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 return [
 	FrameworkBundle::class        => ['all' => true],
 	DoctrineBundle::class         => ['all' => true],
+	SecurityBundle::class         => ['all' => true],
+	TwigBundle::class             => ['all' => true],
+	TwigComponentBundle::class    => ['all' => true],
 
 	// Dev-Test Bundles
 	MakerBundle::class            => ['all' => true],
