@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 15/03/2025, 11:57
+ * Last modified by "IDMarinas" on 15/03/2025, 12:16
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -26,9 +26,12 @@ return static function (FrameworkConfig $config): void {
 	$config->cache()
 		->pool('idm_settings.cache')
 			->adapters(['idm_settings.service.cache_adapter.settings'])
-			->tags('settings')
+			->tags(true)
+	;
+
+	$config->cache()
 		->pool('idm_settings.encrypt.cache')
 			->adapters(['idm_settings.service.cache_adapter.settings.encrypt'])
-			->tags(['settings', 'encrypt'])
+			->tags(true)
 	;
 };
