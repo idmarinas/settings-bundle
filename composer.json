@@ -1,18 +1,21 @@
 {
 	"name": "idmarinas/settings-bundle",
+	"description": "Settings system for Symfony applications, can be added to the User entity or any other entity.",
 	"type": "symfony-bundle",
 	"license": "BSD-3-Clause",
 	"keywords": [
 		"symfony-bundle",
 		"settings-bundle",
-		"user-settings"
+		"user-settings",
+		"settings-symfony",
+		"settings"
 	],
 	"homepage": "https://github.com/idmarinas/settings-bundle",
 	"authors": [
 		{
 			"name": "Iván Diaz Marinas (IDMarinas)",
 			"email": "35842929+idmarinas@users.noreply.github.com",
-			"role": "Creator, Developer"
+			"role": "Author, Developer, Maintainer"
 		}
 	],
 	"support": {
@@ -21,38 +24,30 @@
 	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"require": {
-		"php": "^8.2",
+		"php": "^8.3",
 		"ext-sodium": "*",
-		"idmarinas/common-bundle": "^3.3",
-		"symfony/cache": "^6.4 | ^7.0",
-		"symfony/dependency-injection": "^6.4 | ^7.0",
-		"symfony/framework-bundle": "^6.4 | ^7.0"
+		"doctrine/doctrine-bundle": "^2.13",
+		"idmarinas/common-bundle": "^3.4",
+		"symfony/cache": "^6.4 | ^7.1",
+		"symfony/dependency-injection": "^6.4 | ^7.1",
+		"symfony/framework-bundle": "^6.4 | ^7.1",
+		"symfony/security-bundle": "^6.4 | ^7.1"
 	},
 	"require-dev": {
 		"dama/doctrine-test-bundle": "^8.2",
 		"doctrine/doctrine-fixtures-bundle": "^3.0 | ^4.0",
-		"easycorp/easyadmin-bundle": "^4.20",
+		"idmarinas/composer-plugin": "^1.0",
+		"php-mock/php-mock-phpunit": "^2.12",
 		"phpunit/phpunit": "^9.6",
 		"rector/rector": "^1.2",
-		"symfony/console": "^6.4 | ^7.0",
+		"symfony/browser-kit": "^6.4 | ^7.1",
+		"symfony/console": "^6.4 | ^7.1",
+		"symfony/css-selector": "^6.4 | ^7.1",
 		"symfony/maker-bundle": "^1.61",
-		"symfony/phpunit-bridge": "^7.2",
-		"symfony/runtime": "^6.4 | ^7.0",
-		"symfony/yaml": "^6.4 | ^7.0",
-		"twig/twig": "^3.16",
+		"symfony/runtime": "^6.4 | ^7.1",
+		"symfony/twig-bundle": "^6.4 | ^7.1",
+		"symfony/ux-twig-component": "^2.23",
 		"zenstruck/foundry": "^2.3"
-	},
-	"config": {
-		"allow-plugins": {
-			"composer/package-versions-deprecated": true,
-			"symfony/flex": true,
-			"symfony/runtime": true
-		},
-		"optimize-autoloader": false,
-		"preferred-install": {
-			"*": "dist"
-		},
-		"sort-packages": true
 	},
 	"autoload": {
 		"psr-4": {
@@ -66,6 +61,31 @@
 			"DataFixtures\\": "fixtures/",
 			"Factory\\": "factories/"
 		}
+	},
+	"scripts": {
+		"test:fixtures:load": [
+			"php bin/console doctrine:schema:drop --env=test --force --ansi",
+			"php bin/console doctrine:schema:update --env=test --force --ansi",
+			"php bin/console doctrine:fixtures:load --env=test -n --ansi"
+		],
+		"dev:fixtures:load": [
+			"php bin/console doctrine:schema:drop --env=dev --force --ansi",
+			"php bin/console doctrine:schema:update --env=dev --force --ansi",
+			"php bin/console doctrine:fixtures:load --env=dev -n --ansi"
+		]
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/package-versions-deprecated": true,
+			"idmarinas/composer-plugin": false,
+			"symfony/flex": true,
+			"symfony/runtime": true
+		},
+		"optimize-autoloader": false,
+		"preferred-install": {
+			"*": "dist"
+		},
+		"sort-packages": true
 	},
 	"funding": [
 		{
