@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 03/01/2025, 22:50
+ * Last modified by "IDMarinas" on 15/03/2025, 11:28
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,28 +19,31 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use Idm\Bundle\Settings\Cache\SettingsCacheEncryptInterface;
-use Idm\Bundle\Settings\Cache\SettingsCacheInterface;
+use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheEncryptInterface;
+use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Marshaller\SodiumMarshaller;
 
 return function (ContainerConfigurator $container) {
 	// @formatter:off
 	$container->services()
-		->set('idm_settings.service.cache.adapter.settings', FilesystemAdapter::class)
+		->set('idm_settings.service.cache_adapter.settings', FilesystemAdapter::class)
 			->private()
-			->args(['', '0', param('kernel.cache_dir').'/pools/settings', service('cache.default_marshaller')])
-		->alias(SettingsCacheInterface::class, 'idm_settings.service.cache.adapter.settings')
+			->arg('$directory', '%kernel.cache_dir%/pools/settings')
+			->arg('$marshaller', service('cache.default_marshaller'))
+		->alias(SettingsCacheInterface::class, 'idm_settings.service.cache_adapter.settings')
 			->public()
 
-		->set('idm_settings.service.cache.adapter.settings.encrypt', FilesystemAdapter::class)
+		->set('idm_settings.service.cache_adapter.settings.encrypt', FilesystemAdapter::class)
 			->private()
-			->args(['', '0', param('kernel.cache_dir').'/pools/settings_encrypt', service('idm_settings.cache.sodium_marshaller')])
-		->alias(SettingsCacheEncryptInterface::class, 'idm_settings.service.cache.adapter.settings.encrypt')
+			->arg('$directory', '%kernel.cache_dir%/pools/settings/encrypt')
+			->arg('$marshaller', service('idm_settings.cache.sodium_marshaller'))
+		->alias(SettingsCacheEncryptInterface::class, 'idm_settings.service.cache_adapter.settings.encrypt')
 			->public()
 
 		->set('idm_settings.cache.sodium_marshaller', SodiumMarshaller::class)
-			->args([[param('idm_settings.parameter.cache_keypair')], service('cache.default_marshaller')])
+			->arg('$decryptionKeys', param('idm_settings.parameter.cache_keypair'))
+			->arg('$marshaller', service('cache.default_marshaller'))
 			->private()
 	;
 	// @formatter::on
