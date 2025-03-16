@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 14/03/2025, 23:46
+ * Last modified by "IDMarinas" on 16/03/2025, 21:04
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,7 +19,13 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use App\Entity\Setting\Setting;
+use App\Entity\Setting\SettingDomain;
+use App\Entity\Setting\SettingUser;
 use Idm\Bundle\Settings\IdmSettingsBundle;
+use Idm\Bundle\Settings\Interfaces\Entity\UserSettingsInterface;
+use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
+use Idm\Bundle\Settings\Model\Entity\AbstractSettingDomain;
 use ReflectionClass;
 use Symfony\Component\Filesystem\Filesystem;
 use function Symfony\Component\String\u;
@@ -61,9 +67,11 @@ return static function (ContainerConfigurator $container) {
 					'dir'       => dirname(__DIR__, 2) . '/src/Entity',
 					'prefix'    => 'App\Entity',
 				],
-				//'resolve_target_entities' => [
-				//	AbstractUser::class => User::class,
-				//],
+			],
+			'resolve_target_entities'     => [
+				AbstractSetting::class       => Setting::class,
+				AbstractSettingDomain::class => SettingDomain::class,
+				UserSettingsInterface::class => SettingUser::class,
 			],
 		],
 	]);
