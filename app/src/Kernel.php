@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 14/03/2025, 23:50
+ * Last modified by "IDMarinas" on 16/03/2025, 19:05
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -44,7 +44,7 @@ final class Kernel extends BaseKernel
 		parent::__construct($environment, $debug);
 
 		if ('test' === $this->environment) {
-			$this->testCachePrefix = '/' . uniqid('', true);
+			$this->testCachePrefix = uniqid('/', true);
 		}
 	}
 
