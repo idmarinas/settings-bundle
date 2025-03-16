@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 05/01/2025, 19:34
+ * Last modified by "IDMarinas" on 16/03/2025, 18:30
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,17 +19,16 @@
 
 namespace Idm\Bundle\Settings\Enums;
 
+use Idm\Bundle\Common\Traits\Enums\EnumToArrayTrait;
+
 enum SettingsEnum: string
 {
+	use EnumToArrayTrait;
+
 	case STRING = 'string';
 	case BOOL   = 'bool';
 	case INT    = 'int';
 	case FLOAT  = 'float';
-
-	public static function values (): array
-	{
-		return array_column(self::cases(), 'value');
-	}
 
 	public function format (mixed $value): float|bool|int|string
 	{
