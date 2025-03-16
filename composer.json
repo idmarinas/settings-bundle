@@ -37,6 +37,7 @@
 		"dama/doctrine-test-bundle": "^8.2",
 		"doctrine/doctrine-fixtures-bundle": "^3.0 | ^4.0",
 		"idmarinas/composer-plugin": "^1.0",
+		"idmarinas/user-bundle": "^2.0",
 		"php-mock/php-mock-phpunit": "^2.12",
 		"phpunit/phpunit": "^9.6",
 		"rector/rector": "^1.2",
