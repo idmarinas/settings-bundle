@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 14:10
+ * Last modified by "IDMarinas" on 17/03/2025, 21:50
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,6 +21,7 @@ namespace Idm\Bundle\Settings\Model\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 
 #[ORM\MappedSuperclass()]
@@ -38,7 +39,10 @@ abstract class AbstractSettingDomain
 	protected bool $enabled = false;
 
 	#[ORM\Column(type: Types::BOOLEAN)]
-	protected bool $readOnly = false;
+	protected bool   $readOnly = false;
+	#[ORM\Column(type: Types::STRING, unique: true)]
+	#[Gedmo\Slug(fields: ['name'], separator: '.', prefix: 'idm.settings.domain.')]
+	protected string $cacheKey;
 
 	public function __toString ()
 	{
@@ -91,5 +95,15 @@ abstract class AbstractSettingDomain
 		$this->readOnly = $readOnly;
 
 		return $this;
+	}
+
+	public function getCacheKey (): string
+	{
+		return $this->cacheKey;
+	}
+
+	public function setCacheKey (string $cacheKey): void
+	{
+		$this->cacheKey = $cacheKey;
 	}
 }
