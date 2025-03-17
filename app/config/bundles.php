@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 15/03/2025, 11:40
+ * Last modified by "IDMarinas" on 17/03/2025, 18:13
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,6 +21,7 @@ use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
 use Idm\Bundle\Settings\IdmSettingsBundle;
+use Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MakerBundle\MakerBundle;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
@@ -29,18 +30,19 @@ use Symfony\UX\TwigComponent\TwigComponentBundle;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 return [
-	FrameworkBundle::class        => ['all' => true],
-	DoctrineBundle::class         => ['all' => true],
-	SecurityBundle::class         => ['all' => true],
-	TwigBundle::class             => ['all' => true],
-	TwigComponentBundle::class    => ['all' => true],
+	FrameworkBundle::class              => ['all' => true],
+	DoctrineBundle::class               => ['all' => true],
+	SecurityBundle::class               => ['all' => true],
+	TwigBundle::class                   => ['all' => true],
+	TwigComponentBundle::class          => ['all' => true],
+	StofDoctrineExtensionsBundle::class => ['all' => true],
 
 	// Dev-Test Bundles
-	MakerBundle::class            => ['all' => true],
-	DoctrineFixturesBundle::class => ['all' => true],
-	DAMADoctrineTestBundle::class => ['all' => true],
-	ZenstruckFoundryBundle::class => ['all' => true],
+	MakerBundle::class                  => ['all' => true],
+	DoctrineFixturesBundle::class       => ['all' => true],
+	DAMADoctrineTestBundle::class       => ['all' => true],
+	ZenstruckFoundryBundle::class       => ['all' => true],
 
 	// This Bundle
-	IdmSettingsBundle::class      => ['all' => true],
+	IdmSettingsBundle::class            => ['all' => true],
 ];
