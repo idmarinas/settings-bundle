@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 13:15
+ * Last modified by "IDMarinas" on 17/03/2025, 21:21
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -26,20 +26,21 @@ use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 
 #[ORM\Table(name: 'idm_settings_setting_user')]
 #[ORM\Entity(repositoryClass: SettingUserRepository::class)]
-#[ORM\UniqueConstraint(name: 'idm_settings_uniq_idx_setting_user', columns: ['domain_id', 'name', 'user_id'])]
+#[ORM\UniqueConstraint(name: 'idm_settings_uniq_idx_setting_user', columns: ['domain_id', 'name', 'entity_id'])]
+#[ORM\HasLifecycleCallbacks]
 class SettingUser extends AbstractSetting
 {
 	#[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'settings')]
-	protected ?User $user = null;
+	protected ?User $entity = null;
 
-	public function getUser (): ?User
+	public function getEntity (): ?User
 	{
-		return $this->user;
+		return $this->entity;
 	}
 
-	public function setUser (?User $user): self
+	public function setEntity (?User $entity): self
 	{
-		$this->user = $user;
+		$this->entity = $entity;
 
 		return $this;
 	}
