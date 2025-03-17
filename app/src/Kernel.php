@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 16/03/2025, 19:05
+ * Last modified by "IDMarinas" on 17/03/2025, 18:28
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -198,6 +198,10 @@ final class Kernel extends BaseKernel
 
 		if ($builder->hasExtension('doctrine')) {
 			$loader->load($this->getTestPackagesConfigDir() . '/doctrine.php');
+		}
+
+		if ($builder->hasExtension('stof_doctrine_extensions')) {
+			$loader->load($this->getTestPackagesConfigDir() . '/stof_doctrine_extensions.php');
 		}
 
 		if ($builder->hasExtension('security')) {
