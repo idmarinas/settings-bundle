@@ -147,6 +147,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/rate-limiter" />
       <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/stof/doctrine-extensions-bundle" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
