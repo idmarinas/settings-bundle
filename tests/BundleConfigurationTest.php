@@ -3,7 +3,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 04/01/2025, 11:59
+ * Last modified by "IDMarinas" on 17/03/2025, 15:35
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,18 +23,10 @@ namespace Idm\Bundle\Settings\Tests;
 use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 final class BundleConfigurationTest extends KernelTestCase
 {
-	protected static function createKernel (array $options = []): KernelInterface
-	{
-		/** @var Kernel $kernel */
-		$kernel = parent::createKernel($options);
-		$kernel->handleOptions($options);
-
-		return $kernel;
-	}
+	use CreateKernelCaseTrait;
 
 	public function testInitBundleInvalidConfiguration (): void
 	{
@@ -46,7 +38,7 @@ final class BundleConfigurationTest extends KernelTestCase
 			'config' => static function (Kernel $kernel) {
 				$kernel->addExtraConfig([
 					'idm_settings' => [
-						'cache_sodium_keypair' => 'invalid_key',
+						'cache_keypair' => 'invalid_key',
 					],
 				]);
 			},
