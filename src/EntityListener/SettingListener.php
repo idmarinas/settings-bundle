@@ -1,57 +1,67 @@
 <?php
-
 /**
- * This file is part of Bundle "Idm Settings Bundle".
+ * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * @see https://github.com/idmarinas/settings-bundle/
+ * Last modified by "IDMarinas" on 17/03/2025, 21:54
  *
- * @license https://github.com/idmarinas/settings-bundle/blob/master/LICENSE.txt
+ * @project IDMarinas Settings Bundle
+ * @see     https://github.com/idmarinas/settings-bundle
  *
- * @since 1.0.0
+ * @file    SettingListener.php
+ * @date    17/03/2025
+ * @time    17:47
+ *
+ * @author  Iván Diaz Marinas (IDMarinas)
+ * @license BSD 3-Clause License
+ *
+ * @since   1.0.0
  */
 
 namespace Idm\Bundle\Settings\EntityListener;
 
-use Idm\Bundle\Settings\Entity\Setting;
-use Idm\Bundle\Settings\Event\SettingsEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
+use Doctrine\ORM\Events;
+use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheInterface;
+use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
+use Psr\Cache\CacheException;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Cache\CacheItem;
 
-class SettingListener
+#[AsEntityListener(event: Events::postPersist, lazy: true, entity: AbstractSetting::class)]
+#[AsEntityListener(event: Events::postUpdate, lazy: true, entity: AbstractSetting::class)]
+#[AsEntityListener(event: Events::postRemove, lazy: true, entity: AbstractSetting::class)]
+readonly class SettingListener
 {
-    protected $eventDispatcher;
+	public function __construct (private CacheItemPoolInterface&SettingsCacheInterface $cache) {}
 
-    public function __construct(EventDispatcherInterface $eventDispatcher)
-    {
-        $this->eventDispatcher = $eventDispatcher;
-    }
+	/**
+	 * @throws InvalidArgumentException
+	 * @throws CacheException
+	 */
+	public function postPersist (AbstractSetting $setting): void
+	{
+		$item = new CacheItem();
+		$item->set($setting)->tag([$setting->getCacheKey(), $setting->getDomain()->getCacheKey()]);
 
-    public function prePersist(Setting $setting): void
-    {
-        $this->eventDispatcher->dispatch(new SettingsEvent($setting), SettingsEvent::PRE_CREATE_SETTING);
-    }
+		$this->cache->save($item);
+	}
 
-    public function postPersist(Setting $setting): void
-    {
-        $this->eventDispatcher->dispatch(new SettingsEvent($setting), SettingsEvent::POST_CREATE_SETTING);
-    }
+	/**
+	 * @throws InvalidArgumentException
+	 */
+	public function postUpdate (AbstractSetting $setting): void
+	{
+		$this->cache->invalidateTags([$setting->getCacheKey(), $setting->getDomain()->getCacheKey()]);
+		$this->cache->delete($setting->getCacheKey());
+	}
 
-    public function preUpdate(Setting $setting): void
-    {
-        $this->eventDispatcher->dispatch(new SettingsEvent($setting), SettingsEvent::PRE_UPDATE_SETTING);
-    }
-
-    public function postUpdate(Setting $setting): void
-    {
-        $this->eventDispatcher->dispatch(new SettingsEvent($setting), SettingsEvent::POST_UPDATE_SETTING);
-    }
-
-    public function preRemove(Setting $setting): void
-    {
-        $this->eventDispatcher->dispatch(new SettingsEvent($setting), SettingsEvent::PRE_DELETE_SETTING);
-    }
-
-    public function postRemove(Setting $setting): void
-    {
-        $this->eventDispatcher->dispatch(new SettingsEvent($setting), SettingsEvent::POST_DELETE_SETTING);
-    }
+	/**
+	 * @throws InvalidArgumentException
+	 */
+	public function postRemove (AbstractSetting $setting): void
+	{
+		$this->cache->invalidateTags([$setting->getCacheKey(), $setting->getDomain()->getCacheKey()]);
+		$this->cache->delete($setting->getCacheKey());
+	}
 }
