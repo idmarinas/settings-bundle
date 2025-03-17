@@ -31,14 +31,10 @@ return function (ContainerConfigurator $container) {
 		->set('idm_settings.service.cache_adapter.settings', FilesystemAdapter::class)
 			->private()
 			->args(['', '0', '%kernel.cache_dir%/pools/settings', service('cache.default_marshaller')])
-		->alias(SettingsCacheInterface::class, 'idm_settings.service.cache_adapter.settings')
-			->public()
 
 		->set('idm_settings.service.cache_adapter.settings.encrypt', FilesystemAdapter::class)
 			->private()
 			->args(['', '0', '%kernel.cache_dir%/pools/settings', service('idm_settings.cache.sodium_marshaller')])
-		->alias(SettingsCacheEncryptInterface::class, 'idm_settings.service.cache_adapter.settings.encrypt')
-			->public()
 
 		->set('idm_settings.cache.sodium_marshaller', SodiumMarshaller::class)
 			->arg('$decryptionKeys', param('idm_settings.parameter.cache_keypair'))
