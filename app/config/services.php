@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 16/03/2025, 19:35
+ * Last modified by "IDMarinas" on 17/03/2025, 13:17
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -22,6 +22,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use App\Repository\Setting\SettingDomainRepository;
 use App\Repository\Setting\SettingRepository;
 use App\Repository\Setting\SettingUserRepository;
+use App\Repository\User\UserRepository;
 
 return static function (ContainerConfigurator $container) {
 	// @formatter:off
@@ -30,6 +31,7 @@ return static function (ContainerConfigurator $container) {
 			->set(SettingRepository::class)->public()->autowire()->autoconfigure()
 			->set(SettingDomainRepository::class)->public()->autowire()->autoconfigure()
 			->set(SettingUserRepository::class)->public()->autowire()->autoconfigure()
+			->set(UserRepository::class)->public()->autowire()->autoconfigure()
 	;
 	// @formatter:on
 };
