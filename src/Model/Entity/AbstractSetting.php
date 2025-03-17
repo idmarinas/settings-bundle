@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 14:10
+ * Last modified by "IDMarinas" on 17/03/2025, 21:34
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,9 +23,11 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 use Idm\Bundle\Settings\Enums\SettingsEnum;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\MappedSuperclass]
+#[ORM\HasLifecycleCallbacks]
 abstract class AbstractSetting
 {
 	use UuidTrait;
@@ -51,6 +53,9 @@ abstract class AbstractSetting
 
 	#[ORM\Column(type: Types::INTEGER)]
 	protected int $priorityOrder = 0;
+
+	#[ORM\Column(type: Types::STRING, length: 510, unique: true)]
+	protected string $cacheKey;
 
 	public function __toString (): string
 	{
@@ -125,6 +130,26 @@ abstract class AbstractSetting
 	public function setPriorityOrder (int $priorityOrder): void
 	{
 		$this->priorityOrder = $priorityOrder;
+	}
+
+	public function getCacheKey (): string
+	{
+		return $this->cacheKey;
+	}
+
+	public function setCacheKey (string $cacheKey): void
+	{
+		$this->cacheKey = $cacheKey;
+	}
+
+	#[ORM\PrePersist]
+	#[ORM\PreUpdate]
+	public function doGenerateCacheKey (): void
+	{
+		$entityId = method_exists($this, 'getEntity') ? $this->getEntity() . '.' : '';
+		$key = 'idm.settings.' . $entityId . $this->getDomain()->getName() . '.' . $this->getName();
+
+		$this->setCacheKey((new AsciiSlugger())->slug($key, '.'));
 	}
 
 	public function getFormatedValue (): float|bool|int|string
