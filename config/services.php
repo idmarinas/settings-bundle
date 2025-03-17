@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 15/03/2025, 12:14
+ * Last modified by "IDMarinas" on 17/03/2025, 18:04
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,6 +19,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Idm\Bundle\Settings\EntityListener\SettingListener;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheEncryptInterface;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
@@ -43,6 +44,9 @@ return function (ContainerConfigurator $container) {
 			->arg('$decryptionKeys', param('idm_settings.parameter.cache_keypair'))
 			->arg('$marshaller', service('cache.default_marshaller'))
 			->private()
+
+		->set(SettingListener::class)
+			->arg('$cache', service('idm_settings.cache'))
 	;
 	// @formatter::on
 };
