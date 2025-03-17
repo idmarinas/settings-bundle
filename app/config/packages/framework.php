@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 14/03/2025, 23:46
+ * Last modified by "IDMarinas" on 17/03/2025, 22:11
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -31,4 +31,5 @@ return static function (FrameworkConfig $config) {
 	$config->form()->enabled(false);
 	$config->propertyAccess()->enabled(true);
 	$config->phpErrors()->log(true);
+	$config->serializer()->enabled(true);
 };
