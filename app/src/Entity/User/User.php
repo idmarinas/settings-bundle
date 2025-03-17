@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 13:15
+ * Last modified by "IDMarinas" on 17/03/2025, 21:20
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -35,7 +35,7 @@ class User extends AbstractUser implements EntityWithSettingsInterface
 	/**
 	 * @var Collection<int, AbstractSetting>
 	 */
-	#[ORM\OneToMany(targetEntity: SettingUser::class, mappedBy: 'user', cascade: ['all'])]
+	#[ORM\OneToMany(targetEntity: SettingUser::class, mappedBy: 'entity', cascade: ['all'])]
 	private Collection $settings;
 
 	public function __construct ()
@@ -54,7 +54,7 @@ class User extends AbstractUser implements EntityWithSettingsInterface
 	public function addSetting (SettingUser|AbstractSetting $setting): self
 	{
 		if (!$this->settings->contains($setting)) {
-			$setting->setUser($this);
+			$setting->setEntity($this);
 
 			$this->settings->add($setting);
 		}
@@ -64,9 +64,9 @@ class User extends AbstractUser implements EntityWithSettingsInterface
 
 	public function removeSetting (SettingUser|AbstractSetting $setting): self
 	{
-		if ($this->settings->removeElement($setting) && $setting->getUser() === $this) {
+		if ($this->settings->removeElement($setting) && $setting->getEntity() === $this) {
 			// set the owning side to null (unless already changed)
-			$setting->setUser(null);
+			$setting->setEntity(null);
 		}
 
 		return $this;
