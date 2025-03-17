@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 14/03/2025, 23:47
+ * Last modified by "IDMarinas" on 17/03/2025, 18:10
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -29,7 +29,7 @@ return static function (ContainerConfigurator $container) {
 				'translatable'        => false,
 				'timestampable'       => false,
 				'blameable'           => false,
-				'sluggable'           => false,
+				'sluggable'           => true,
 				'tree'                => false,
 				'loggable'            => false,
 				'sortable'            => false,
