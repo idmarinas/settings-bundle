@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 16:58
+ * Last modified by "IDMarinas" on 17/03/2025, 17:57
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,6 +19,8 @@
 
 namespace Idm\Bundle\Settings\Enums;
 
+use Symfony\Component\String\Slugger\AsciiSlugger;
+
 enum CacheKeyEnum: string
 {
 	/** List of settings */
@@ -27,8 +29,22 @@ enum CacheKeyEnum: string
 	/** Item of setting */
 	case ITEM = 'idm_settings.item';
 
+	case DOMAIN = 'idm_settings.domain';
+
 	public static function formatCacheItem (string $value): string
 	{
-		return self::ITEM->value . '_' . $value;
+		return self::slugged(self::ITEM->value . '.' . $value);
+	}
+
+	public static function formatCacheDomain (string $value): string
+	{
+		return self::slugged(self::DOMAIN->value . '.' . $value);
+	}
+
+	protected static function slugged (string $value): string
+	{
+		$slugger = new AsciiSlugger();
+
+		return $slugger->slug($value, '.');
 	}
 }
