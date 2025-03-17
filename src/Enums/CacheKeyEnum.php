@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 15/03/2025, 24:05
+ * Last modified by "IDMarinas" on 17/03/2025, 16:58
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -26,4 +26,9 @@ enum CacheKeyEnum: string
 
 	/** Item of setting */
 	case ITEM = 'idm_settings.item';
+
+	public static function formatCacheItem (string $value): string
+	{
+		return self::ITEM->value . '_' . $value;
+	}
 }
