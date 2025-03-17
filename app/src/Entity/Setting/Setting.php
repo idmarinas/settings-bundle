@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 16/03/2025, 21:18
+ * Last modified by "IDMarinas" on 17/03/2025, 21:24
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -26,4 +26,5 @@ use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 #[ORM\Table(name: 'idm_settings_setting')]
 #[ORM\UniqueConstraint(name: 'idm_settings_uniq_idx__setting', columns: ['domain_id', 'name'])]
 #[ORM\Entity(repositoryClass: SettingRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Setting extends AbstractSetting {}
