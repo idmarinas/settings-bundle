@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 21:34
+ * Last modified by "IDMarinas" on 18/03/2025, 22:38
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -40,8 +40,8 @@ abstract class AbstractSetting
 	#[ORM\JoinColumn(nullable: false)]
 	protected ?AbstractSettingDomain $domain = null;
 
-	#[ORM\Column(type: Types::STRING, length: 1000)]
-	#[Assert\Length(min: 0, max: 1000)]
+	#[ORM\Column(type: Types::STRING)]
+	#[Assert\Length(min: 0, max: 255)]
 	protected string $description = '';
 
 	#[ORM\Column(type: Types::STRING, enumType: SettingsEnum::class)]
