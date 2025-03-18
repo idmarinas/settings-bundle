@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 23:39
+ * Last modified by "IDMarinas" on 18/03/2025, 23:58
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -25,6 +25,7 @@ use Factory\Setting\SettingDomainFactory;
 use Factory\Setting\SettingFactory;
 use Factory\Setting\SettingUserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Translation\TranslatableMessage;
 use Zenstruck\Foundry\Test\Factories;
 
 class SettingTest extends KernelTestCase
@@ -93,5 +94,31 @@ class SettingTest extends KernelTestCase
 		$entity->_delete();
 
 		SettingUserFactory::assert()->notExists(['id' => $entityId]);
+	}
+
+	public function testSettingTranslatable ()
+	{
+		self::bootKernel();
+
+		$entity = SettingFactory::random();
+
+		$this->assertNull($entity->translateName());
+
+		$this->assertNull($entity->translateDescription());
+
+		$entity->setTranslatable(true);
+
+		$entity->_save();
+
+		$this->assertInstanceOf(TranslatableMessage::class, $entity->translateName());
+		$this->assertInstanceOf(TranslatableMessage::class, $entity->translateDescription());
+
+		$this->assertEquals($entity->getName(), $entity->translateName()->getMessage());
+		$this->assertEquals([], $entity->translateName()->getParameters());
+		$this->assertEquals($entity->getTranslationDomain(), $entity->translateName()->getDomain());
+
+		$this->assertEquals($entity->getDescription(), $entity->translateDescription()->getMessage());
+		$this->assertEquals([], $entity->translateName()->getParameters());
+		$this->assertEquals($entity->getTranslationDomain(), $entity->translateDescription()->getDomain());
 	}
 }
