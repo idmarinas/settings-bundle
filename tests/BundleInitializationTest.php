@@ -3,7 +3,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 23:18
+ * Last modified by "IDMarinas" on 18/03/2025, 23:44
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,6 +21,8 @@
 namespace Idm\Bundle\Settings\Tests;
 
 use App\Kernel;
+use Idm\Bundle\Settings\EntityListener\SettingDomainListener;
+use Idm\Bundle\Settings\EntityListener\SettingListener;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class BundleInitializationTest extends KernelTestCase
@@ -48,6 +50,8 @@ final class BundleInitializationTest extends KernelTestCase
 		$this->assertArrayHasKey('idm_settings.cache.sodium_marshaller', $container->getRemovedIds());
 		$this->assertArrayHasKey('idm_settings.cache', $container->getRemovedIds());
 		$this->assertArrayHasKey('idm_settings.encrypt.cache', $container->getRemovedIds());
+		$this->assertArrayHasKey(SettingDomainListener::class, $container->getRemovedIds());
+		$this->assertArrayHasKey(SettingListener::class, $container->getRemovedIds());
 
 		$this->assertTrue($container->getParameterBag()->has('idm_settings.parameter.cache_keypair'));
 	}
