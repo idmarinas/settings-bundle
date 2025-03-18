@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 16/03/2025, 21:03
+ * Last modified by "IDMarinas" on 18/03/2025, 22:05
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,6 +21,7 @@ namespace App\Entity\Setting;
 
 use App\Repository\Setting\SettingDomainRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Idm\Bundle\Settings\EntityListener\SettingDomainListener;
 use Idm\Bundle\Settings\Model\Entity\AbstractSettingDomain;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -28,4 +29,5 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Table(name: 'idm_settings_setting_domain')]
 #[ORM\Entity(repositoryClass: SettingDomainRepository::class)]
 #[UniqueEntity(fields: 'domain', message: 'domain.not_unique')]
+#[ORM\EntityListeners([SettingDomainListener::class])]
 class SettingDomain extends AbstractSettingDomain {}
