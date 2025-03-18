@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 21:21
+ * Last modified by "IDMarinas" on 18/03/2025, 22:50
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -22,11 +22,13 @@ namespace App\Entity\Setting;
 use App\Entity\User\User;
 use App\Repository\Setting\SettingUserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Idm\Bundle\Settings\EntityListener\SettingListener;
 use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 
 #[ORM\Table(name: 'idm_settings_setting_user')]
 #[ORM\Entity(repositoryClass: SettingUserRepository::class)]
 #[ORM\UniqueConstraint(name: 'idm_settings_uniq_idx_setting_user', columns: ['domain_id', 'name', 'entity_id'])]
+#[ORM\EntityListeners([SettingListener::class])]
 #[ORM\HasLifecycleCallbacks]
 class SettingUser extends AbstractSetting
 {
