@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 22:22
+ * Last modified by "IDMarinas" on 18/03/2025, 23:39
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -20,8 +20,10 @@
 namespace Idm\Bundle\Settings\Tests\Entity;
 
 use App\Entity\Setting\Setting;
+use App\Entity\Setting\SettingUser;
 use Factory\Setting\SettingDomainFactory;
 use Factory\Setting\SettingFactory;
+use Factory\Setting\SettingUserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Zenstruck\Foundry\Test\Factories;
 
@@ -36,16 +38,60 @@ class SettingTest extends KernelTestCase
 
 		$entity = SettingFactory::createOne([
 			'domain' => SettingDomainFactory::new(),
-		])->_real();
+		]);
 
-		$this->assertIsObject($entity);
+		$this->assertIsObject($entity->_real());
 
-		$this->assertInstanceOf(Setting::class, $entity);
+		$this->assertEquals($entity->getName(), (string)$entity->_real());
 
-		$array = $serializer->normalize($entity, 'array');
+		$this->assertInstanceOf(Setting::class, $entity->_real());
+
+		$array = $serializer->normalize($entity->_real(), 'array');
 
 		$this->assertIsArray($array);
 
 		$this->assertIsObject($serializer->denormalize($array, Setting::class));
+
+		SettingFactory::assert()->count(101);
+
+		$entity->_delete();
+
+		SettingFactory::assert()->count(100);
+	}
+
+	public function testSettingUpdate ()
+	{
+		self::bootKernel();
+
+		$oEntity = SettingFactory::random();
+		$entity = clone $oEntity->_real();
+		$oEntity->setName('changed_name');
+
+		$this->assertInstanceOf(Setting::class, $oEntity->_real());
+
+		$oEntity->_save();
+
+		SettingFactory::assert()->exists(['id' => $entity->getId()]);
+
+		$newEntity = SettingFactory::find($entity->getId());
+
+		$this->assertEquals('changed_name', $newEntity->getName());
+		$this->assertNotEquals($newEntity->getName(), $entity->getName());
+	}
+
+	public function testSettingDelete ()
+	{
+		self::bootKernel();
+
+		$entity = SettingUserFactory::random();
+		$entityId = $entity->getId();
+
+		$this->assertNotNull($entityId);
+
+		$this->assertInstanceOf(SettingUser::class, $entity->_real());
+
+		$entity->_delete();
+
+		SettingUserFactory::assert()->notExists(['id' => $entityId]);
 	}
 }
