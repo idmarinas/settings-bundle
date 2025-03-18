@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:14
+ * Last modified by "IDMarinas" on 18/03/2025, 22:47
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,14 +23,22 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
+use Idm\Bundle\Settings\Traits\Entity\TranslatableSettingTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\MappedSuperclass()]
 abstract class AbstractSettingDomain
 {
 	use UuidTrait;
+	use TranslatableSettingTrait;
 
 	#[ORM\Column(type: Types::STRING, unique: true)]
+	#[Assert\Length(min: 0, max: 255)]
 	protected string $name = 'default';
+
+	#[ORM\Column(type: Types::STRING)]
+	#[Assert\Length(min: 0, max: 255)]
+	protected string $description = '';
 
 	#[ORM\Column(type: Types::INTEGER)]
 	protected int $priorityOrder = 0;
@@ -39,7 +47,8 @@ abstract class AbstractSettingDomain
 	protected bool $enabled = false;
 
 	#[ORM\Column(type: Types::BOOLEAN)]
-	protected bool   $readOnly = false;
+	protected bool $readOnly = false;
+
 	#[ORM\Column(type: Types::STRING, unique: true)]
 	#[Gedmo\Slug(fields: ['name'], separator: '.', prefix: 'idm.settings.domain.')]
 	protected string $cacheKey;
@@ -57,6 +66,18 @@ abstract class AbstractSettingDomain
 	public function setName (string $name): self
 	{
 		$this->name = $name;
+
+		return $this;
+	}
+
+	public function getDescription (): string
+	{
+		return $this->description;
+	}
+
+	public function setDescription (string $description): self
+	{
+		$this->description = $description;
 
 		return $this;
 	}
