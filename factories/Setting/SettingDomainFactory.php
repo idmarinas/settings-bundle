@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:56
+ * Last modified by "IDMarinas" on 18/03/2025, 22:58
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -41,7 +41,7 @@ final class SettingDomainFactory extends PersistentProxyObjectFactory
 	{
 		return [
 			'enabled'       => self::faker()->boolean(),
-			'name'          => self::faker()->unique()->words(mt_rand(1, 5)),
+			'name'          => self::faker()->unique()->words(mt_rand(1, 5), true),
 			'description'   => self::faker()->text(255),
 			'priorityOrder' => self::faker()->randomDigit() * self::faker()->randomDigit(),
 			'readOnly'      => self::faker()->boolean(),

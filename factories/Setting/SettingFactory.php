@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:56
+ * Last modified by "IDMarinas" on 18/03/2025, 22:59
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -51,7 +51,7 @@ final class SettingFactory extends PersistentProxyObjectFactory
 
 		return [
 			'description'   => self::faker()->text(255),
-			'name'          => self::faker()->unique()->words(),
+			'name'          => self::faker()->unique()->words(mt_rand(1, 5), true),
 			'type'          => $type,
 			'value'         => $value,
 			'priorityOrder' => self::faker()->randomNumber(),
