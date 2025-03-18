@@ -59,7 +59,7 @@ abstract class AbstractSetting
 
 	public function __toString (): string
 	{
-		return $this->domain . ') ' . $this->name;
+		return $this->getName();
 	}
 
 	public function getName (): string
