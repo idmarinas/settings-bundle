@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 15:26
+ * Last modified by "IDMarinas" on 18/03/2025, 22:56
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -20,7 +20,6 @@
 namespace Factory\Setting;
 
 use App\Entity\Setting\Setting;
-use Factory\AbstractSettingDomainFactory;
 use Idm\Bundle\Settings\Enums\SettingsEnum;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -29,13 +28,6 @@ use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
  */
 final class SettingFactory extends PersistentProxyObjectFactory
 {
-	/**
-	 * @see  https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
-	 *
-	 * @todo inject services if required
-	 */
-	public function __construct () {}
-
 	public static function class (): string
 	{
 		return Setting::class;
@@ -54,12 +46,12 @@ final class SettingFactory extends PersistentProxyObjectFactory
 			SettingsEnum::BOOL  => self::faker()->boolean(),
 			SettingsEnum::INT   => self::faker()->randomDigit(),
 			SettingsEnum::FLOAT => self::faker()->randomFloat(),
-			default             => self::faker()->text(1000),
+			default             => self::faker()->text(255),
 		};
 
 		return [
-			'description'   => self::faker()->text(1000),
-			'name'          => implode('_', self::faker()->unique()->words()),
+			'description'   => self::faker()->text(255),
+			'name'          => self::faker()->unique()->words(),
 			'type'          => $type,
 			'value'         => $value,
 			'priorityOrder' => self::faker()->randomNumber(),
