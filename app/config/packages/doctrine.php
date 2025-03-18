@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 13:16
+ * Last modified by "IDMarinas" on 18/03/2025, 17:30
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -24,7 +24,6 @@ use App\Entity\Setting\SettingDomain;
 use App\Entity\User\User;
 use Idm\Bundle\Settings\IdmSettingsBundle;
 use Idm\Bundle\Settings\Interfaces\Entity\EntityWithSettingsInterface;
-use Idm\Bundle\Settings\Interfaces\Entity\SettingsWithEntityInterface;
 use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 use Idm\Bundle\Settings\Model\Entity\AbstractSettingDomain;
 use ReflectionClass;
