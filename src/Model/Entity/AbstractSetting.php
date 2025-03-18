@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:38
+ * Last modified by "IDMarinas" on 18/03/2025, 22:47
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,6 +23,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 use Idm\Bundle\Settings\Enums\SettingsEnum;
+use Idm\Bundle\Settings\Traits\Entity\TranslatableSettingTrait;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -31,6 +32,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class AbstractSetting
 {
 	use UuidTrait;
+	use TranslatableSettingTrait;
 
 	#[ORM\Column(type: Types::STRING)]
 	#[Assert\Length(min: 3, max: 255)]
