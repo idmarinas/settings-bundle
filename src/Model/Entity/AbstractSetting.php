@@ -127,9 +127,11 @@ abstract class AbstractSetting
 		return $this->priorityOrder;
 	}
 
-	public function setPriorityOrder (int $priorityOrder): void
+	public function setPriorityOrder (int $priorityOrder): static
 	{
 		$this->priorityOrder = $priorityOrder;
+
+		return $this;
 	}
 
 	public function getCacheKey (): string
@@ -137,9 +139,11 @@ abstract class AbstractSetting
 		return $this->cacheKey;
 	}
 
-	public function setCacheKey (string $cacheKey): void
+	public function setCacheKey (string $cacheKey): static
 	{
 		$this->cacheKey = $cacheKey;
+
+		return $this;
 	}
 
 	#[ORM\PrePersist]
