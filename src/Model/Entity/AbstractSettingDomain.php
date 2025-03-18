@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 21:50
+ * Last modified by "IDMarinas" on 18/03/2025, 22:14
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -46,7 +46,7 @@ abstract class AbstractSettingDomain
 
 	public function __toString ()
 	{
-		return $this->name;
+		return $this->getName();
 	}
 
 	public function getName (): string
