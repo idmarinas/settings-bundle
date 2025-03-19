@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:02
+ * Last modified by "IDMarinas" on 19/03/2025, 21:18
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -40,10 +40,10 @@ readonly class SettingDomainListener
 	 */
 	public function postPersist (AbstractSettingDomain $domain): void
 	{
-		$item = $this->cache->get($domain->getCacheKey(), function (ItemInterface $item) use ($domain) {
+		$item = $this->cache->get($domain->getSlug(), function (ItemInterface $item) use ($domain) {
 			return $item
 				->set($domain)
-				->tag([SettingsCacheKeysEnum::DOMAIN_ITEM->value, $domain->getCacheKey()])
+				->tag([SettingsCacheKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()])
 			;
 		});
 
@@ -55,7 +55,7 @@ readonly class SettingDomainListener
 	 */
 	public function postUpdate (AbstractSettingDomain $domain): void
 	{
-		$this->cache->invalidateTags([$domain->getCacheKey()]);
+		$this->cache->invalidateTags([SettingsCacheKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()]);
 	}
 
 	/**
@@ -63,7 +63,7 @@ readonly class SettingDomainListener
 	 */
 	public function postRemove (AbstractSettingDomain $domain): void
 	{
-		$this->cache->invalidateTags([$domain->getCacheKey()]);
-		$this->cache->delete($domain->getCacheKey());
+		$this->cache->invalidateTags([SettingsCacheKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()]);
+		$this->cache->delete($domain->getSlug());
 	}
 }
