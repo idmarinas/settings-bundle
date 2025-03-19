@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:47
+ * Last modified by "IDMarinas" on 19/03/2025, 21:35
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,8 +23,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 use Idm\Bundle\Settings\Enums\SettingsEnum;
+use Idm\Bundle\Settings\Enums\SettingsSlugKeysEnum;
 use Idm\Bundle\Settings\Traits\Entity\TranslatableSettingTrait;
-use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\MappedSuperclass]
@@ -33,6 +33,8 @@ abstract class AbstractSetting
 {
 	use UuidTrait;
 	use TranslatableSettingTrait;
+
+	public const string ENTITY_NAME = 'default';
 
 	#[ORM\Column(type: Types::STRING)]
 	#[Assert\Length(min: 3, max: 255)]
@@ -56,8 +58,8 @@ abstract class AbstractSetting
 	#[ORM\Column(type: Types::INTEGER)]
 	protected int $priorityOrder = 0;
 
-	#[ORM\Column(type: Types::STRING, length: 510, unique: true)]
-	protected string $cacheKey;
+	#[ORM\Column(type: Types::STRING, length: 255, unique: true)]
+	protected string $slug;
 
 	public function __toString (): string
 	{
@@ -136,26 +138,23 @@ abstract class AbstractSetting
 		return $this;
 	}
 
-	public function getCacheKey (): string
+	public function getSlug (): string
 	{
-		return $this->cacheKey;
+		return $this->slug;
 	}
 
-	public function setCacheKey (string $cacheKey): static
+	public function setSlug (string $slug): static
 	{
-		$this->cacheKey = $cacheKey;
+		$this->slug = $slug;
 
 		return $this;
 	}
 
 	#[ORM\PrePersist]
 	#[ORM\PreUpdate]
-	public function doGenerateCacheKey (): void
+	public function doGenerateSlug (): void
 	{
-		$entityId = method_exists($this, 'getEntity') ? $this->getEntity() . '.' : '';
-		$key = 'idm.settings.' . $entityId . $this->getDomain()->getName() . '.' . $this->getName();
-
-		$this->setCacheKey((new AsciiSlugger())->slug($key, '.'));
+		$this->setSlug(SettingsSlugKeysEnum::slug(get_called_class()::ENTITY_NAME, $this->getName()));
 	}
 
 	public function getFormatedValue (): float|bool|int|string
