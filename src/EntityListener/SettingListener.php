@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 19/03/2025, 21:19
+ * Last modified by "IDMarinas" on 19/03/2025, 21:35
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,7 +21,7 @@ namespace Idm\Bundle\Settings\EntityListener;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
-use Idm\Bundle\Settings\Enums\SettingsCacheKeysEnum;
+use Idm\Bundle\Settings\Enums\SettingsSlugKeysEnum;
 use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
@@ -43,7 +43,7 @@ readonly class SettingListener
 		$item = $this->cache->get($setting->getSlug(), function (ItemInterface $item) use ($setting) {
 			return $item
 				->set($setting)
-				->tag([SettingsCacheKeysEnum::ITEM->value, $setting->getSlug(), $setting->getDomain()->getSlug()])
+				->tag([SettingsSlugKeysEnum::ITEM->value, $setting->getSlug(), $setting->getDomain()->getSlug()])
 			;
 		});
 
@@ -55,7 +55,7 @@ readonly class SettingListener
 	 */
 	public function postUpdate (AbstractSetting $setting): void
 	{
-		$this->cache->invalidateTags([SettingsCacheKeysEnum::ITEM->value, $setting->getSlug()]);
+		$this->cache->invalidateTags([SettingsSlugKeysEnum::ITEM->value, $setting->getSlug()]);
 	}
 
 	/**
@@ -63,7 +63,7 @@ readonly class SettingListener
 	 */
 	public function postRemove (AbstractSetting $setting): void
 	{
-		$this->cache->invalidateTags([SettingsCacheKeysEnum::ITEM->value, $setting->getSlug()]);
+		$this->cache->invalidateTags([SettingsSlugKeysEnum::ITEM->value, $setting->getSlug()]);
 		$this->cache->delete($setting->getSlug());
 	}
 }
