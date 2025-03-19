@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 19/03/2025, 21:18
+ * Last modified by "IDMarinas" on 19/03/2025, 21:35
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,7 +21,7 @@ namespace Idm\Bundle\Settings\EntityListener;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
-use Idm\Bundle\Settings\Enums\SettingsCacheKeysEnum;
+use Idm\Bundle\Settings\Enums\SettingsSlugKeysEnum;
 use Idm\Bundle\Settings\Model\Entity\AbstractSettingDomain;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
@@ -43,7 +43,7 @@ readonly class SettingDomainListener
 		$item = $this->cache->get($domain->getSlug(), function (ItemInterface $item) use ($domain) {
 			return $item
 				->set($domain)
-				->tag([SettingsCacheKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()])
+				->tag([SettingsSlugKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()])
 			;
 		});
 
@@ -55,7 +55,7 @@ readonly class SettingDomainListener
 	 */
 	public function postUpdate (AbstractSettingDomain $domain): void
 	{
-		$this->cache->invalidateTags([SettingsCacheKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()]);
+		$this->cache->invalidateTags([SettingsSlugKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()]);
 	}
 
 	/**
@@ -63,7 +63,7 @@ readonly class SettingDomainListener
 	 */
 	public function postRemove (AbstractSettingDomain $domain): void
 	{
-		$this->cache->invalidateTags([SettingsCacheKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()]);
+		$this->cache->invalidateTags([SettingsSlugKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()]);
 		$this->cache->delete($domain->getSlug());
 	}
 }
