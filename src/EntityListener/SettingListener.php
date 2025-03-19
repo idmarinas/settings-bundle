@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:03
+ * Last modified by "IDMarinas" on 19/03/2025, 21:19
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -40,10 +40,10 @@ readonly class SettingListener
 	 */
 	public function postPersist (AbstractSetting $setting): void
 	{
-		$item = $this->cache->get($setting->getCacheKey(), function (ItemInterface $item) use ($setting) {
+		$item = $this->cache->get($setting->getSlug(), function (ItemInterface $item) use ($setting) {
 			return $item
 				->set($setting)
-				->tag([SettingsCacheKeysEnum::ITEM->value, $setting->getCacheKey(), $setting->getDomain()->getCacheKey()])
+				->tag([SettingsCacheKeysEnum::ITEM->value, $setting->getSlug(), $setting->getDomain()->getSlug()])
 			;
 		});
 
@@ -55,7 +55,7 @@ readonly class SettingListener
 	 */
 	public function postUpdate (AbstractSetting $setting): void
 	{
-		$this->cache->invalidateTags([$setting->getCacheKey()]);
+		$this->cache->invalidateTags([SettingsCacheKeysEnum::ITEM->value, $setting->getSlug()]);
 	}
 
 	/**
@@ -63,7 +63,7 @@ readonly class SettingListener
 	 */
 	public function postRemove (AbstractSetting $setting): void
 	{
-		$this->cache->invalidateTags([$setting->getCacheKey()]);
-		$this->cache->delete($setting->getCacheKey());
+		$this->cache->invalidateTags([SettingsCacheKeysEnum::ITEM->value, $setting->getSlug()]);
+		$this->cache->delete($setting->getSlug());
 	}
 }
