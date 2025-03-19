@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:47
+ * Last modified by "IDMarinas" on 19/03/2025, 21:22
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -50,8 +50,8 @@ abstract class AbstractSettingDomain
 	protected bool $readOnly = false;
 
 	#[ORM\Column(type: Types::STRING, unique: true)]
-	#[Gedmo\Slug(fields: ['name'], separator: '.', prefix: 'idm.settings.domain.')]
-	protected string $cacheKey;
+	#[Gedmo\Slug(fields: ['name'], separator: '.', prefix: 'domain.')]
+	protected string $slug;
 
 	public function __toString ()
 	{
@@ -118,13 +118,13 @@ abstract class AbstractSettingDomain
 		return $this;
 	}
 
-	public function getCacheKey (): string
+	public function getSlug (): string
 	{
-		return $this->cacheKey;
+		return $this->slug;
 	}
 
-	public function setCacheKey (string $cacheKey): void
+	public function setSlug (string $slug): void
 	{
-		$this->cacheKey = $cacheKey;
+		$this->slug = $slug;
 	}
 }
