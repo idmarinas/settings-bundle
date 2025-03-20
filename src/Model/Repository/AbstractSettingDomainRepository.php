@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 19:00
+ * Last modified by "IDMarinas" on 20/03/2025, 23:09
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -20,7 +20,7 @@
 namespace Idm\Bundle\Settings\Model\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Idm\Bundle\Settings\Enums\SettingsSlugKeysEnum;
+use Idm\Bundle\Settings\Enums\SettingsKeysEnum;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheEncryptInterface;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheInterface;
 use Idm\Bundle\Settings\Model\Entity\AbstractSettingDomain;
@@ -48,7 +48,7 @@ abstract class AbstractSettingDomainRepository extends ServiceEntityRepository
 	{
 		$encrypted = $encrypted ?? $this->encryptCache;
 
-		$key = SettingsSlugKeysEnum::slug('domain', $domainName);
+		$key = SettingsKeysEnum::slug('domain', $domainName);
 
 		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) use ($key) {
 			$entity = $this->findOneBy(['slug' => $key]);
@@ -60,7 +60,7 @@ abstract class AbstractSettingDomainRepository extends ServiceEntityRepository
 				return null;
 			}
 
-			$item->tag([SettingsSlugKeysEnum::DOMAIN->value, $entity->getSlug()]);
+			$item->tag([SettingsKeysEnum::DOMAIN->value, $entity->getSlug()]);
 
 			return $entity;
 		});

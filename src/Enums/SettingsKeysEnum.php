@@ -2,12 +2,12 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 19/03/2025, 23:22
+ * Last modified by "IDMarinas" on 20/03/2025, 23:09
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
  *
- * @file    SettingsSlugKeysEnum.php
+ * @file    SettingsKeysEnum.php
  * @date    02/01/2025
  * @time    23:00
  *
@@ -21,7 +21,7 @@ namespace Idm\Bundle\Settings\Enums;
 
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
-enum SettingsSlugKeysEnum: string
+enum SettingsKeysEnum: string
 {
 	case COLLECTION_SETTINGS_BY_DOMAIN = 'idm.settings.collection.settings.by.domain';
 	case COLLECTION_SETTINGS           = 'idm.settings.collection.settings';

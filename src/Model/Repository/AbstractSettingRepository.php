@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 19:33
+ * Last modified by "IDMarinas" on 20/03/2025, 23:09
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,13 +21,14 @@ namespace Idm\Bundle\Settings\Model\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Idm\Bundle\Settings\Enums\SettingsSlugKeysEnum;
+use Idm\Bundle\Settings\Enums\SettingsKeysEnum;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheEncryptInterface;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheInterface;
 use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 use Idm\Bundle\Settings\Model\Entity\AbstractSettingDomain;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
@@ -50,7 +51,7 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 	{
 		$encrypted = $encrypted ?? $this->encryptCache;
 
-		$key = SettingsSlugKeysEnum::slug($this->getEntityName()::ENTITY_NAME, $settingName);
+		$key = SettingsKeysEnum::slug($this->getEntityName()::ENTITY_NAME, $settingName);
 
 		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) use ($key) {
 			$entity = $this->findOneBy(['slug' => $key]);
@@ -62,7 +63,7 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 				return null;
 			}
 
-			$item->tag([SettingsSlugKeysEnum::SETTING->value, $entity->getSlug()]);
+			$item->tag([SettingsKeysEnum::SETTING->value, $entity->getSlug()]);
 
 			return $entity;
 		});
@@ -85,7 +86,7 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 	public function getSettingsObjectsByDomain (string $domainName, ?bool $encrypted = null): ArrayCollection
 	{
 		$encrypted = $encrypted ?? $this->encryptCache;
-		$key = SettingsSlugKeysEnum::slug(SettingsSlugKeysEnum::COLLECTION_SETTINGS_BY_DOMAIN->value, $domainName);
+		$key = SettingsKeysEnum::slug(SettingsKeysEnum::COLLECTION_SETTINGS_BY_DOMAIN->value, $domainName);
 
 		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) use ($key, $domainName) {
 			/** @var AbstractSettingDomainRepository $rep */
@@ -96,7 +97,7 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 				return new ArrayCollection();
 			}
 
-			$item->tag([SettingsSlugKeysEnum::COLLECTION_SETTINGS_BY_DOMAIN->value, $key, $domain->getSlug()]);
+			$item->tag([SettingsKeysEnum::COLLECTION_SETTINGS_BY_DOMAIN->value, $key, $domain->getSlug()]);
 
 			$entities = $this->findBy(['domain' => (string)$domain->getId()]);
 
@@ -109,6 +110,17 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 
 			return new ArrayCollection($entities);
 		});
+	}
+
+	/**
+	 * @throws InvalidArgumentException
+	 */
+	public function getSettingsOfEntityById (string|Uuid $id, ?bool $encrypted = null): ArrayCollection
+	{
+		$encrypted = $encrypted ?? $this->encryptCache;
+		$key = SettingsKeysEnum::COLLECTION_DOMAINS . '';
+
+		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) {});
 	}
 
 	public function getCache (bool $encrypted = false): CacheItemPoolInterface&TagAwareCacheInterface

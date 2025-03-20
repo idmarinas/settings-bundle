@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 19/03/2025, 21:35
+ * Last modified by "IDMarinas" on 20/03/2025, 23:09
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,7 +23,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 use Idm\Bundle\Settings\Enums\SettingsEnum;
-use Idm\Bundle\Settings\Enums\SettingsSlugKeysEnum;
+use Idm\Bundle\Settings\Enums\SettingsKeysEnum;
 use Idm\Bundle\Settings\Traits\Entity\TranslatableSettingTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -154,7 +154,7 @@ abstract class AbstractSetting
 	#[ORM\PreUpdate]
 	public function doGenerateSlug (): void
 	{
-		$this->setSlug(SettingsSlugKeysEnum::slug(get_called_class()::ENTITY_NAME, $this->getName()));
+		$this->setSlug(SettingsKeysEnum::slug(get_called_class()::ENTITY_NAME, $this->getName()));
 	}
 
 	public function getFormatedValue (): float|bool|int|string
