@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 16/03/2025, 19:03
+ * Last modified by "IDMarinas" on 20/03/2025, 12:57
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,9 +21,9 @@ namespace App\Repository\Setting;
 
 use App\Entity\Setting\SettingUser;
 use Doctrine\Persistence\ManagerRegistry;
-use Idm\Bundle\Settings\Model\Repository\AbstractSettingUserRepository;
+use Idm\Bundle\Settings\Model\Repository\AbstractSettingRepository;
 
-class SettingUserRepository extends AbstractSettingUserRepository
+class SettingUserRepository extends AbstractSettingRepository
 {
 	public function __construct (ManagerRegistry $registry)
 	{
