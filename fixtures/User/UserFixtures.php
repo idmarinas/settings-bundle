@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 14:12
+ * Last modified by "IDMarinas" on 20/03/2025, 22:57
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -49,16 +49,16 @@ final class UserFixtures extends Fixture
 		// 50% with settings, 50% without settings
 		UserFactory::createMany(20, [
 			'password' => self::USER_PASS,
-			'settings' => SettingUserFactory::new(['domain' => $domain])->many(mt_rand(1, 10)),
+			'settings' => SettingUserFactory::new(['domain' => $domain])->many(8),
 		]);
 
 		// 50% unverified, 50% banned and 50% deleted
 		UserFactory::createMany(20, ['password' => self::USER_PASS]);
 
-		$users = UserFactory::all();
-
-		foreach ($users as $key => $user) {
-			$this->addReference(self::KEY_USER . $key, $user->_real());
-		}
+		UserFactory::createOne([
+			'password' => self::USER_PASS,
+			'email'    => self::USER_ADMIN_EMAIL,
+			'settings' => SettingUserFactory::new(['domain' => $domain])->many(40),
+		]);
 	}
 }
