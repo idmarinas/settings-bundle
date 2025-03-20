@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 14:19
+ * Last modified by "IDMarinas" on 20/03/2025, 18:16
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,12 +23,47 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Factory\Setting\SettingDomainFactory;
 use Factory\Setting\SettingFactory;
+use Idm\Bundle\Settings\Enums\SettingsEnum;
 
 final class SettingFixtures extends Fixture
 {
+	public const string  SETTING_TEST       = 'setting_test';
+	public const string  DOMAIN_TEST        = 'domain_test';
+	public const string  DOMAIN_TEST_STRING = 'domain_test_string';
+	public const int     DOMAIN_TEST_INT    = 500;
+	public const float   DOMAIN_TEST_FLOAT  = 45.36;
+	public const bool    DOMAIN_TEST_BOOL   = true;
+
 	public function load (ObjectManager $manager): void
 	{
-		SettingFactory::createMany(100, [
+		SettingFactory::createMany(100, ['domain' => SettingDomainFactory::random()]);
+
+		$domain = SettingDomainFactory::createOne(['name' => self::DOMAIN_TEST]);
+
+		SettingFactory::createMany(50, ['domain' => $domain]);
+
+		SettingFactory::createOne([
+			'name'   => self::SETTING_TEST . '_string',
+			'value'  => self::DOMAIN_TEST_STRING,
+			'type'   => SettingsEnum::STRING,
+			'domain' => SettingDomainFactory::random(),
+		]);
+		SettingFactory::createOne([
+			'name'   => self::SETTING_TEST . '_int',
+			'value'  => self::DOMAIN_TEST_INT,
+			'type'   => SettingsEnum::INT,
+			'domain' => SettingDomainFactory::random(),
+		]);
+		SettingFactory::createOne([
+			'name'   => self::SETTING_TEST . '_float',
+			'value'  => self::DOMAIN_TEST_FLOAT,
+			'type'   => SettingsEnum::FLOAT,
+			'domain' => SettingDomainFactory::random(),
+		]);
+		SettingFactory::createOne([
+			'name'   => self::SETTING_TEST . '_bool',
+			'value'  => self::DOMAIN_TEST_BOOL,
+			'type'   => SettingsEnum::BOOL,
 			'domain' => SettingDomainFactory::random(),
 		]);
 	}
