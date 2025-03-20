@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:50
+ * Last modified by "IDMarinas" on 20/03/2025, 19:01
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -32,6 +32,8 @@ use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 #[ORM\HasLifecycleCallbacks]
 class SettingUser extends AbstractSetting
 {
+	public const string ENTITY_NAME = 'user_settings';
+
 	#[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'settings')]
 	protected ?User $entity = null;
 
