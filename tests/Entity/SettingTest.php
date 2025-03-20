@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 18:22
+ * Last modified by "IDMarinas" on 20/03/2025, 18:28
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -53,11 +53,11 @@ class SettingTest extends KernelTestCase
 
 		$this->assertIsObject($serializer->denormalize($array, Setting::class));
 
-		SettingFactory::assert()->count(151);
+		SettingFactory::assert()->count(155);
 
 		$entity->_delete();
 
-		SettingFactory::assert()->count(150);
+		SettingFactory::assert()->count(154);
 	}
 
 	public function testSettingUpdate ()
