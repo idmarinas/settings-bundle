@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 22:47
+ * Last modified by "IDMarinas" on 21/03/2025, 24:04
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -25,9 +25,12 @@ use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 use Idm\Bundle\Settings\Model\Repository\AbstractSettingRepository;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\Factories;
 
 class SettingRepositoryTest extends KernelTestCase
 {
+	use Factories;
+
 	/**
 	 * @throws InvalidArgumentException
 	 */
