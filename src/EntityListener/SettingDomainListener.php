@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 19/03/2025, 21:35
+ * Last modified by "IDMarinas" on 20/03/2025, 12:48
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -43,7 +43,7 @@ readonly class SettingDomainListener
 		$item = $this->cache->get($domain->getSlug(), function (ItemInterface $item) use ($domain) {
 			return $item
 				->set($domain)
-				->tag([SettingsSlugKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()])
+				->tag([SettingsSlugKeysEnum::DOMAIN->value, $domain->getSlug()])
 			;
 		});
 
@@ -55,7 +55,7 @@ readonly class SettingDomainListener
 	 */
 	public function postUpdate (AbstractSettingDomain $domain): void
 	{
-		$this->cache->invalidateTags([SettingsSlugKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()]);
+		$this->cache->invalidateTags([$domain->getSlug()]);
 	}
 
 	/**
@@ -63,7 +63,7 @@ readonly class SettingDomainListener
 	 */
 	public function postRemove (AbstractSettingDomain $domain): void
 	{
-		$this->cache->invalidateTags([SettingsSlugKeysEnum::DOMAIN_ITEM->value, $domain->getSlug()]);
+		$this->cache->invalidateTags([$domain->getSlug()]);
 		$this->cache->delete($domain->getSlug());
 	}
 }
