@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 12:57
+ * Last modified by "IDMarinas" on 20/03/2025, 19:01
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -25,6 +25,9 @@ use Idm\Bundle\Settings\Model\Repository\AbstractSettingRepository;
 
 class SettingUserRepository extends AbstractSettingRepository
 {
+	/** By default, use encrypted cache */
+	protected bool $encryptCache = true;
+
 	public function __construct (ManagerRegistry $registry)
 	{
 		parent::__construct($registry, SettingUser::class);
