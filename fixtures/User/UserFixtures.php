@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 22:57
+ * Last modified by "IDMarinas" on 21/03/2025, 24:09
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -59,6 +59,11 @@ final class UserFixtures extends Fixture
 			'password' => self::USER_PASS,
 			'email'    => self::USER_ADMIN_EMAIL,
 			'settings' => SettingUserFactory::new(['domain' => $domain])->many(40),
+		]);
+
+		UserFactory::createOne([
+			'password' => self::USER_PASS,
+			'email'    => self::USER_TEST_EMAIL,
 		]);
 	}
 }
