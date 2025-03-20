@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 18:16
+ * Last modified by "IDMarinas" on 20/03/2025, 18:24
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -27,12 +27,12 @@ use Idm\Bundle\Settings\Enums\SettingsEnum;
 
 final class SettingFixtures extends Fixture
 {
-	public const string  SETTING_TEST       = 'setting_test';
-	public const string  DOMAIN_TEST        = 'domain_test';
-	public const string  DOMAIN_TEST_STRING = 'domain_test_string';
-	public const int     DOMAIN_TEST_INT    = 500;
-	public const float   DOMAIN_TEST_FLOAT  = 45.36;
-	public const bool    DOMAIN_TEST_BOOL   = true;
+	public const string  SETTING_TEST        = 'setting_test';
+	public const string  DOMAIN_TEST         = 'domain_test';
+	public const string  SETTING_TEST_STRING = 'setting_test_string';
+	public const int     SETTING_TEST_INT    = 500;
+	public const float   SETTING_TEST_FLOAT  = 45.36;
+	public const bool    SETTING_TEST_BOOL   = true;
 
 	public function load (ObjectManager $manager): void
 	{
@@ -44,25 +44,25 @@ final class SettingFixtures extends Fixture
 
 		SettingFactory::createOne([
 			'name'   => self::SETTING_TEST . '_string',
-			'value'  => self::DOMAIN_TEST_STRING,
+			'value'  => self::SETTING_TEST_STRING,
 			'type'   => SettingsEnum::STRING,
 			'domain' => SettingDomainFactory::random(),
 		]);
 		SettingFactory::createOne([
 			'name'   => self::SETTING_TEST . '_int',
-			'value'  => self::DOMAIN_TEST_INT,
+			'value'  => self::SETTING_TEST_INT,
 			'type'   => SettingsEnum::INT,
 			'domain' => SettingDomainFactory::random(),
 		]);
 		SettingFactory::createOne([
 			'name'   => self::SETTING_TEST . '_float',
-			'value'  => self::DOMAIN_TEST_FLOAT,
+			'value'  => self::SETTING_TEST_FLOAT,
 			'type'   => SettingsEnum::FLOAT,
 			'domain' => SettingDomainFactory::random(),
 		]);
 		SettingFactory::createOne([
 			'name'   => self::SETTING_TEST . '_bool',
-			'value'  => self::DOMAIN_TEST_BOOL,
+			'value'  => self::SETTING_TEST_BOOL,
 			'type'   => SettingsEnum::BOOL,
 			'domain' => SettingDomainFactory::random(),
 		]);
