@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 22:41
+ * Last modified by "IDMarinas" on 21/03/2025, 24:05
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -22,10 +22,13 @@ namespace Idm\Bundle\Settings\Tests\Repository;
 use Idm\Bundle\Settings\Model\Entity\AbstractSettingDomain;
 use Idm\Bundle\Settings\Model\Repository\AbstractSettingDomainRepository;
 use Psr\Cache\InvalidArgumentException;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Foundry\Test\Factories;
 
-class SettingDomainRepositoryTest extends WebTestCase
+class SettingDomainRepositoryTest extends KernelTestCase
 {
+	use Factories;
+
 	/**
 	 * @throws InvalidArgumentException
 	 */
