@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 21:59
+ * Last modified by "IDMarinas" on 20/03/2025, 17:35
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,4 +19,10 @@
 
 namespace Idm\Bundle\Settings\Interfaces\Cache;
 
-interface SettingsCacheEncryptInterface extends SettingsCacheInterface {}
+use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
+
+interface SettingsCacheEncryptInterface
+{
+	public function setCacheEncrypt (CacheItemPoolInterface&TagAwareCacheInterface $cacheEncrypt): self;
+}
