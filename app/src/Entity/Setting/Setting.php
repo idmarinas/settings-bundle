@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 21:45
+ * Last modified by "IDMarinas" on 19/03/2025, 20:53
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -29,4 +29,7 @@ use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 #[ORM\Entity(repositoryClass: SettingRepository::class)]
 #[ORM\EntityListeners([SettingListener::class])]
 #[ORM\HasLifecycleCallbacks]
-class Setting extends AbstractSetting {}
+class Setting extends AbstractSetting
+{
+	public const string ENTITY_NAME = 'setting';
+}
