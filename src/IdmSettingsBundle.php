@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 15/03/2025, 13:11
+ * Last modified by "IDMarinas" on 20/03/2025, 15:49
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,12 +19,10 @@
 
 namespace Idm\Bundle\Settings;
 
-use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
-use Symfony\UX\TwigComponent\TwigComponentBundle;
 
 final class IdmSettingsBundle extends AbstractBundle
 {
@@ -42,13 +40,5 @@ final class IdmSettingsBundle extends AbstractBundle
 	public function prependExtension (ContainerConfigurator $container, ContainerBuilder $builder): void
 	{
 		$container->import(dirname(__DIR__) . '/config/cache.php');
-
-		if ($builder::willBeAvailable('symfony/twig-bundle', TwigBundle::class, ['twig/twig'])) {
-			$container->import(dirname(__DIR__) . '/config/twig.php');
-		}
-
-		if ($builder::willBeAvailable('symfony/ux-twig-component', TwigComponentBundle::class, ['symfony/twig-bundle'])) {
-			$container->import(dirname(__DIR__) . '/config/twig_component.php');
-		}
 	}
 }
