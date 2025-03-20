@@ -32,7 +32,7 @@ class SettingDomainRepositoryTest extends KernelTestCase
 	/**
 	 * @throws InvalidArgumentException
 	 */
-	public function testSomething (): void
+	public function testDomainNoExist (): void
 	{
 		self::bootKernel();
 
