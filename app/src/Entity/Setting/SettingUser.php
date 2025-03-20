@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 19:01
+ * Last modified by "IDMarinas" on 20/03/2025, 23:20
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,6 +23,8 @@ use App\Entity\User\User;
 use App\Repository\Setting\SettingUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Idm\Bundle\Settings\EntityListener\SettingListener;
+use Idm\Bundle\Settings\Interfaces\Entity\EntityWithSettingsInterface;
+use Idm\Bundle\Settings\Interfaces\Entity\SettingsWithEntityInterface;
 use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 
 #[ORM\Table(name: 'idm_settings_setting_user')]
@@ -30,7 +32,7 @@ use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 #[ORM\UniqueConstraint(name: 'idm_settings_uniq_idx_setting_user', columns: ['domain_id', 'name', 'entity_id'])]
 #[ORM\EntityListeners([SettingListener::class])]
 #[ORM\HasLifecycleCallbacks]
-class SettingUser extends AbstractSetting
+class SettingUser extends AbstractSetting implements SettingsWithEntityInterface
 {
 	public const string ENTITY_NAME = 'user_settings';
 
@@ -42,7 +44,7 @@ class SettingUser extends AbstractSetting
 		return $this->entity;
 	}
 
-	public function setEntity (?User $entity): self
+	public function setEntity (null|User|EntityWithSettingsInterface $entity): self
 	{
 		$this->entity = $entity;
 
