@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 19/03/2025, 21:34
+ * Last modified by "IDMarinas" on 19/03/2025, 23:22
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -23,10 +23,11 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 
 enum SettingsSlugKeysEnum: string
 {
-	case COLLECTION_DOMAIN = 'idm.settings.collection.domain';
-	case COLLECTION_ITEMS  = 'idm.settings.collection.items';
-	case DOMAIN_ITEM       = 'idm.settings.domain.item';
-	case ITEM              = 'idm.settings.item';
+	case COLLECTION_SETTINGS_BY_DOMAIN = 'idm.settings.collection.settings.by.domain';
+	case COLLECTION_SETTINGS           = 'idm.settings.collection.settings';
+	case COLLECTION_DOMAINS            = 'idm.settings.collection.domains';
+	case DOMAIN                        = 'idm.settings.domain';
+	case SETTING                       = 'idm.settings.setting';
 
 	public static function slug (string $entityName, string $name): string
 	{
