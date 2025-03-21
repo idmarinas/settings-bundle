@@ -85,7 +85,6 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 	 */
 	public function getSettingsObjectsByDomain (string $domainName, ?bool $encrypted = null): ArrayCollection
 	{
-		$encrypted = $encrypted ?? $this->encryptCache;
 		$key = SettingsKeysEnum::slug(SettingsKeysEnum::COLLECTION_SETTINGS_BY_DOMAIN->value, $domainName);
 
 		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) use ($key, $domainName) {
@@ -125,6 +124,8 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 
 	public function getCache (bool $encrypted = false): CacheItemPoolInterface&TagAwareCacheInterface
 	{
+		$encrypted = $encrypted ?? $this->encryptCache;
+
 		return $encrypted ? $this->cacheEncrypt : $this->cache;
 	}
 
