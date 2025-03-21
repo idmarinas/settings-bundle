@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 21/03/2025, 21:34
+ * Last modified by "IDMarinas" on 21/03/2025, 21:55
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -46,8 +46,6 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 	 */
 	public function getSettingObject (string $settingName, ?bool $encrypted = null): ?AbstractSetting
 	{
-		$encrypted = $encrypted ?? $this->encryptCache;
-
 		$key = SettingsKeysEnum::slug($this->getEntityName()::ENTITY_NAME, $settingName);
 
 		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) use ($key) {
