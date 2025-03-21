@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 23:09
+ * Last modified by "IDMarinas" on 21/03/2025, 21:34
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -22,15 +22,16 @@ namespace Idm\Bundle\Settings\Model\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Idm\Bundle\Settings\Enums\SettingsKeysEnum;
+use Idm\Bundle\Settings\Exception\RequiredFieldMissingException;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheEncryptInterface;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheInterface;
+use Idm\Bundle\Settings\Interfaces\Entity\SettingsWithEntityInterface;
 use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 use Idm\Bundle\Settings\Model\Entity\AbstractSettingDomain;
-use Psr\Cache\CacheItemPoolInterface;
+use Idm\Bundle\Settings\Traits\Repository\EncryptCacheAndCacheTrait;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Cache\ItemInterface;
-use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 /**
  * @extends ServiceEntityRepository<AbstractSetting>
@@ -38,11 +39,7 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 abstract class AbstractSettingRepository extends ServiceEntityRepository
 	implements SettingsCacheInterface, SettingsCacheEncryptInterface
 {
-	/** By default, not use encrypted cache */
-	protected bool $encryptCache = false;
-
-	private CacheItemPoolInterface&TagAwareCacheInterface $cacheEncrypt;
-	private CacheItemPoolInterface&TagAwareCacheInterface $cache;
+	use EncryptCacheAndCacheTrait;
 
 	/**
 	 * @throws InvalidArgumentException
@@ -98,10 +95,10 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 
 			$item->tag([SettingsKeysEnum::COLLECTION_SETTINGS_BY_DOMAIN->value, $key, $domain->getSlug()]);
 
-			$entities = $this->findBy(['domain' => (string)$domain->getId()]);
+			$entities = $this->findBy(['domain' => $domain->getId()]);
 
 			if ([] === $entities) {
-				// Si no se encuentra se cachea 30 segundos
+				// If not found, it is cached for 30 seconds.
 				$item->expiresAfter(30);
 
 				return new ArrayCollection();
@@ -112,34 +109,81 @@ abstract class AbstractSettingRepository extends ServiceEntityRepository
 	}
 
 	/**
+	 * Get settings of the Entity ID
+	 *
+	 * @return ArrayCollection<AbstractSetting>
 	 * @throws InvalidArgumentException
+	 * @throws RequiredFieldMissingException
 	 */
 	public function getSettingsOfEntityById (string|Uuid $id, ?bool $encrypted = null): ArrayCollection
 	{
-		$encrypted = $encrypted ?? $this->encryptCache;
-		$key = SettingsKeysEnum::COLLECTION_DOMAINS . '';
+		$this->compatibilitySettingsWithEntity(__METHOD__);
 
-		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) {});
+		$slug = SettingsKeysEnum::slug($this->getEntityName()::ENTITY_NAME, $id);
+		$key = SettingsKeysEnum::COLLECTION_SETTINGS_BY_ENTITY_ID->value . '.' . $slug;
+
+		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) use ($key, $id, $slug) {
+			$entities = $this->findBy(['entity' => $id]);
+
+			if ([] === $entities) {
+				// If not found, it is cached for 30 seconds.
+				$item->expiresAfter(30);
+
+				return new ArrayCollection();
+			}
+
+			$item->tag([SettingsKeysEnum::COLLECTION_SETTINGS_BY_ENTITY_ID->value, $key, $slug]);
+
+			return new ArrayCollection($entities);
+		});
 	}
 
-	public function getCache (bool $encrypted = false): CacheItemPoolInterface&TagAwareCacheInterface
-	{
-		$encrypted = $encrypted ?? $this->encryptCache;
+	/**
+	 * @throws RequiredFieldMissingException
+	 * @throws InvalidArgumentException
+	 */
+	public function getSettingsOfEntityByIdAndDomain (string|Uuid $id, string $domainName, ?bool $encrypted = null):
+	ArrayCollection {
+		$this->compatibilitySettingsWithEntity(__METHOD__);
 
-		return $encrypted ? $this->cacheEncrypt : $this->cache;
+		$slug = SettingsKeysEnum::slug($this->getEntityName()::ENTITY_NAME, $domainName . '.' . $id);
+		$key = SettingsKeysEnum::COLLECTION_SETTINGS_BY_ENTITY_ID_AND_DOMAIN->value . '.' . $slug;
+
+		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) use ($key, $domainName, $id, $slug) {
+			/** @var AbstractSettingDomainRepository $rep */
+			$rep = $this->getEntityManager()->getRepository(AbstractSettingDomain::class);
+			$domain = $rep->getDomainObject($domainName);
+
+			$entities = $this->findBy(['entity' => $id, 'domain' => $domain]);
+
+			if ([] === $entities) {
+				// If not found, it is cached for 30 seconds.
+				$item->expiresAfter(30);
+
+				return new ArrayCollection();
+			}
+
+			$domainSlug = $domain->getSlug();
+			$item->tag([SettingsKeysEnum::COLLECTION_SETTINGS_BY_ENTITY_ID_AND_DOMAIN->value, $key, $slug, $domainSlug]);
+
+			return new ArrayCollection($entities);
+		});
 	}
 
-	public function setCache (CacheItemPoolInterface&TagAwareCacheInterface $cache): self
+	/**
+	 * @throws RequiredFieldMissingException
+	 */
+	private function compatibilitySettingsWithEntity (string $method): void
 	{
-		$this->cache = $cache;
-
-		return $this;
-	}
-
-	public function setCacheEncrypt (CacheItemPoolInterface&TagAwareCacheInterface $cacheEncrypt): self
-	{
-		$this->cacheEncrypt = $cacheEncrypt;
-
-		return $this;
+		if (!is_subclass_of($this->getEntityName(), SettingsWithEntityInterface::class)) {
+			throw new RequiredFieldMissingException(
+				sprintf(
+					'The method "%s" requires that the entity "%s" implements the interface "%s".',
+					$method,
+					$this->getEntityName(),
+					SettingsWithEntityInterface::class
+				)
+			);
+		}
 	}
 }
