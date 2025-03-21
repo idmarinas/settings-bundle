@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 21/03/2025, 24:10
+ * Last modified by "IDMarinas" on 21/03/2025, 22:55
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,7 +21,9 @@ declare(strict_types=1);
 
 namespace Idm\Bundle\Settings\Tests\Repository;
 
+use App\Entity\Setting\Setting;
 use App\Entity\Setting\SettingUser;
+use App\Repository\Setting\SettingRepository;
 use App\Repository\Setting\SettingUserRepository;
 use DataFixtures\User\UserFixtures;
 use Factory\User\UserFactory;
@@ -57,6 +59,41 @@ class SettingUserRepositoryTest extends KernelTestCase
 		$settings = $repository->getSettingsOfEntityById($user->getId());
 
 		$this->assertCount(0, $settings);
+	}
+
+	/**
+	 * @throws RequiredFieldMissingException
+	 * @throws InvalidArgumentException
+	 */
+	public function testSettingsEntityAndDomain (): void
+	{
+		$repository = $this->getRepository();
+
+		$user = UserFactory::find(['email' => UserFixtures::USER_ADMIN_EMAIL]);
+		$settings = $repository->getSettingsOfEntityByIdAndDomain($user->getId(), 'idm_user_user_entity');
+
+		$this->assertCount(40, $settings);
+
+		$user = UserFactory::find(['email' => UserFixtures::USER_TEST_EMAIL]);
+		$settings = $repository->getSettingsOfEntityByIdAndDomain($user->getId(), 'idm_user_user_entity');
+
+		$this->assertCount(0, $settings);
+	}
+
+	/**
+	 * @throws RequiredFieldMissingException
+	 * @throws InvalidArgumentException
+	 */
+	public function testInvalidEntitySetting ()
+	{
+		self::bootKernel();
+		$em = static::getContainer()->get('doctrine.orm.entity_manager');
+
+		/** @var SettingRepository $repository */
+		$repository = $em->getRepository(Setting::class);
+
+		$this->expectException(RequiredFieldMissingException::class);
+		$repository->getSettingsOfEntityById('invalid-id');
 	}
 
 	private function getRepository (): SettingUserRepository
