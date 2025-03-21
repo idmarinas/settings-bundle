@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 18:28
+ * Last modified by "IDMarinas" on 21/03/2025, 22:19
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -38,6 +38,7 @@ class SettingTest extends KernelTestCase
 		$serializer = self::getContainer()->get('serializer');
 
 		$entity = SettingFactory::createOne([
+			'name'   => 'test setting',
 			'domain' => SettingDomainFactory::new(),
 		]);
 
