@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 22:08
+ * Last modified by "IDMarinas" on 21/03/2025, 21:17
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -41,11 +41,11 @@ return function (ContainerConfigurator $container) {
 			->private()
 
 		->set(SettingListener::class)
-			->args([service('idm_settings.cache')])
+			->args([service('idm_settings.cache'), service('idm_settings.encrypt.cache')])
 			->tag('doctrine.orm.entity_listener')
 
 		->set(SettingDomainListener::class)
-			->args([service('idm_settings.cache')])
+			->args([service('idm_settings.cache'), service('idm_settings.encrypt.cache')])
 			->tag('doctrine.orm.entity_listener')
 	;
 	// @formatter::on
