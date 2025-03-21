@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 23:20
+ * Last modified by "IDMarinas" on 21/03/2025, 21:32
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -25,6 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Idm\Bundle\Settings\EntityListener\SettingListener;
 use Idm\Bundle\Settings\Interfaces\Entity\EntityWithSettingsInterface;
 use Idm\Bundle\Settings\Interfaces\Entity\SettingsWithEntityInterface;
+use Idm\Bundle\Settings\Interfaces\Entity\UseEncryptCacheInterface;
 use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 
 #[ORM\Table(name: 'idm_settings_setting_user')]
@@ -32,7 +33,7 @@ use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 #[ORM\UniqueConstraint(name: 'idm_settings_uniq_idx_setting_user', columns: ['domain_id', 'name', 'entity_id'])]
 #[ORM\EntityListeners([SettingListener::class])]
 #[ORM\HasLifecycleCallbacks]
-class SettingUser extends AbstractSetting implements SettingsWithEntityInterface
+class SettingUser extends AbstractSetting implements SettingsWithEntityInterface, UseEncryptCacheInterface
 {
 	public const string ENTITY_NAME = 'user_settings';
 
