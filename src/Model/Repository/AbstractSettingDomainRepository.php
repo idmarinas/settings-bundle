@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 23:09
+ * Last modified by "IDMarinas" on 21/03/2025, 15:30
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -46,8 +46,6 @@ abstract class AbstractSettingDomainRepository extends ServiceEntityRepository
 	 */
 	public function getDomainObject (string $domainName, ?bool $encrypted = null): ?AbstractSettingDomain
 	{
-		$encrypted = $encrypted ?? $this->encryptCache;
-
 		$key = SettingsKeysEnum::slug('domain', $domainName);
 
 		return $this->getCache($encrypted)->get($key, function (ItemInterface $item) use ($key) {
@@ -66,8 +64,10 @@ abstract class AbstractSettingDomainRepository extends ServiceEntityRepository
 		});
 	}
 
-	public function getCache (bool $encrypted = false): CacheItemPoolInterface&TagAwareCacheInterface
+	public function getCache (?bool $encrypted = null): CacheItemPoolInterface&TagAwareCacheInterface
 	{
+		$encrypted = $encrypted ?? $this->encryptCache;
+
 		return $encrypted ? $this->cacheEncrypt : $this->cache;
 	}
 
