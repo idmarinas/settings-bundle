@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 21/03/2025, 15:30
+ * Last modified by "IDMarinas" on 21/03/2025, 21:34
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -24,10 +24,9 @@ use Idm\Bundle\Settings\Enums\SettingsKeysEnum;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheEncryptInterface;
 use Idm\Bundle\Settings\Interfaces\Cache\SettingsCacheInterface;
 use Idm\Bundle\Settings\Model\Entity\AbstractSettingDomain;
-use Psr\Cache\CacheItemPoolInterface;
+use Idm\Bundle\Settings\Traits\Repository\EncryptCacheAndCacheTrait;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Contracts\Cache\ItemInterface;
-use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 /**
  * @extends ServiceEntityRepository<AbstractSettingDomain>
@@ -35,11 +34,7 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 abstract class AbstractSettingDomainRepository extends ServiceEntityRepository
 	implements SettingsCacheInterface, SettingsCacheEncryptInterface
 {
-	/** By default, not use encrypted cache */
-	protected bool $encryptCache = false;
-
-	private CacheItemPoolInterface&TagAwareCacheInterface $cacheEncrypt;
-	private CacheItemPoolInterface&TagAwareCacheInterface $cache;
+	use EncryptCacheAndCacheTrait;
 
 	/**
 	 * @throws InvalidArgumentException
@@ -62,26 +57,5 @@ abstract class AbstractSettingDomainRepository extends ServiceEntityRepository
 
 			return $entity;
 		});
-	}
-
-	public function getCache (?bool $encrypted = null): CacheItemPoolInterface&TagAwareCacheInterface
-	{
-		$encrypted = $encrypted ?? $this->encryptCache;
-
-		return $encrypted ? $this->cacheEncrypt : $this->cache;
-	}
-
-	public function setCache (CacheItemPoolInterface&TagAwareCacheInterface $cache): self
-	{
-		$this->cache = $cache;
-
-		return $this;
-	}
-
-	public function setCacheEncrypt (CacheItemPoolInterface&TagAwareCacheInterface $cacheEncrypt): self
-	{
-		$this->cacheEncrypt = $cacheEncrypt;
-
-		return $this;
 	}
 }
