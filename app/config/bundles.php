@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 18:13
+ * Last modified by "IDMarinas" on 22/03/2025, 11:19
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -20,6 +20,7 @@
 use DAMA\DoctrineTestBundle\DAMADoctrineTestBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle;
+use EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle;
 use Idm\Bundle\Settings\IdmSettingsBundle;
 use Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -36,6 +37,7 @@ return [
 	TwigBundle::class                   => ['all' => true],
 	TwigComponentBundle::class          => ['all' => true],
 	StofDoctrineExtensionsBundle::class => ['all' => true],
+	EasyAdminBundle::class              => ['all' => true],
 
 	// Dev-Test Bundles
 	MakerBundle::class                  => ['all' => true],
