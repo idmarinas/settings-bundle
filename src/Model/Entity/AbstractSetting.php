@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 22/03/2025, 12:25
+ * Last modified by "IDMarinas" on 22/03/2025, 12:31
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -60,7 +60,7 @@ abstract class AbstractSetting
 	#[ORM\Column(type: Types::INTEGER)]
 	protected int $priorityOrder = 0;
 
-	#[ORM\Column(type: Types::STRING, length: 750, unique: true)]
+	#[ORM\Column(type: Types::STRING, length: 755, unique: true)]
 	protected string $slug;
 
 	public function __toString (): string
