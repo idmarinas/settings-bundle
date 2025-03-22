@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 22/03/2025, 12:44
+ * Last modified by "IDMarinas" on 22/03/2025, 12:49
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -26,7 +26,6 @@ use function Symfony\Component\Translation\t;
 
 trait TranslatableFieldsTrait
 {
-
 	public function translatableFields (): iterable
 	{
 		$t = fn(string $message) => t($message, [], 'IdmSettingsBundle');
