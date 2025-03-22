@@ -29,10 +29,7 @@
 		"doctrine/doctrine-bundle": "^2.13",
 		"gedmo/doctrine-extensions": "^3.19",
 		"idmarinas/common-bundle": "^3.4",
-		"symfony/cache": "^6.4 | ^7.1",
-		"symfony/dependency-injection": "^6.4 | ^7.1",
-		"symfony/framework-bundle": "^6.4 | ^7.1",
-		"symfony/security-bundle": "^6.4 | ^7.1"
+		"symfony/framework-bundle": "^6.4 | ^7.1"
 	},
 	"require-dev": {
 		"dama/doctrine-test-bundle": "^8.2",
@@ -49,8 +46,7 @@
 		"symfony/css-selector": "^6.4 | ^7.1",
 		"symfony/maker-bundle": "^1.61",
 		"symfony/runtime": "^6.4 | ^7.1",
-		"symfony/twig-bundle": "^6.4 | ^7.1",
-		"symfony/ux-twig-component": "^2.23",
+		"symfony/security-bundle": "^6.4 | ^7.1",
 		"zenstruck/foundry": "^2.3"
 	},
 	"autoload": {
