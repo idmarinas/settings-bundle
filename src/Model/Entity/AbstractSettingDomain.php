@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 19/03/2025, 21:22
+ * Last modified by "IDMarinas" on 22/03/2025, 12:25
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -22,6 +22,7 @@ namespace Idm\Bundle\Settings\Model\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 use Idm\Bundle\Settings\Traits\Entity\TranslatableSettingTrait;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -31,6 +32,7 @@ abstract class AbstractSettingDomain
 {
 	use UuidTrait;
 	use TranslatableSettingTrait;
+	use TimestampableEntity;
 
 	#[ORM\Column(type: Types::STRING, unique: true)]
 	#[Assert\Length(min: 0, max: 255)]
