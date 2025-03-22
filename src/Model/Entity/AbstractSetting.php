@@ -58,7 +58,7 @@ abstract class AbstractSetting
 	#[ORM\Column(type: Types::INTEGER)]
 	protected int $priorityOrder = 0;
 
-	#[ORM\Column(type: Types::STRING, length: 255, unique: true)]
+	#[ORM\Column(type: Types::STRING, length: 750, unique: true)]
 	protected string $slug;
 
 	public function __toString (): string
