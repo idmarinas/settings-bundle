@@ -37,6 +37,7 @@
 	"require-dev": {
 		"dama/doctrine-test-bundle": "^8.2",
 		"doctrine/doctrine-fixtures-bundle": "^3.0 | ^4.0",
+		"easycorp/easyadmin-bundle": "^4.24",
 		"idmarinas/composer-plugin": "^1.0",
 		"idmarinas/user-bundle": "^2.0",
 		"php-mock/php-mock-phpunit": "^2.12",
