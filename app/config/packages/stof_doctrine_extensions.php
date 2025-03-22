@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 18:10
+ * Last modified by "IDMarinas" on 22/03/2025, 11:47
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -27,7 +27,7 @@ return static function (ContainerConfigurator $container) {
 			# Activate the extensions you want
 			'default' => [
 				'translatable'        => false,
-				'timestampable'       => false,
+				'timestampable'       => true,
 				'blameable'           => false,
 				'sluggable'           => true,
 				'tree'                => false,
