@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 22/03/2025, 12:25
+ * Last modified by "IDMarinas" on 22/03/2025, 12:31
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -51,7 +51,7 @@ abstract class AbstractSettingDomain
 	#[ORM\Column(type: Types::BOOLEAN)]
 	protected bool $readOnly = false;
 
-	#[ORM\Column(type: Types::STRING, unique: true, length: 755)]
+	#[ORM\Column(type: Types::STRING, length: 755, unique: true)]
 	#[Gedmo\Slug(fields: ['name'], separator: '.', prefix: 'domain.')]
 	protected string $slug;
 
