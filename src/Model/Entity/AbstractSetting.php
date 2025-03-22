@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 23:09
+ * Last modified by "IDMarinas" on 22/03/2025, 12:25
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,6 +21,7 @@ namespace Idm\Bundle\Settings\Model\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 use Idm\Bundle\Settings\Enums\SettingsEnum;
 use Idm\Bundle\Settings\Enums\SettingsKeysEnum;
@@ -33,6 +34,7 @@ abstract class AbstractSetting
 {
 	use UuidTrait;
 	use TranslatableSettingTrait;
+	use TimestampableEntity;
 
 	public const string ENTITY_NAME = 'default';
 
