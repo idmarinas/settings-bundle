@@ -49,7 +49,7 @@ abstract class AbstractSettingDomain
 	#[ORM\Column(type: Types::BOOLEAN)]
 	protected bool $readOnly = false;
 
-	#[ORM\Column(type: Types::STRING, unique: true)]
+	#[ORM\Column(type: Types::STRING, unique: true, length: 755)]
 	#[Gedmo\Slug(fields: ['name'], separator: '.', prefix: 'domain.')]
 	protected string $slug;
 
