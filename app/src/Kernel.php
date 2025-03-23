@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 18:28
+ * Last modified by "IDMarinas" on 23/03/2025, 21:09
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -75,16 +75,17 @@ final class Kernel extends BaseKernel
 
 	public function configureRoutes (RoutingConfigurator $routes): void
 	{
-		$rf = $this->getConfigDir() . '/routes.php';
-		if (file_exists($rf)) {
-			$routes->import($rf);
-		}
 		//$routes->import('security.route_loader.logout', 'service')->methods(['GET']);
 
-		$extraRoutes = array_unique($this->extraRoutes);
+		$extraRoutes = array_unique(array_merge([
+			$this->getConfigDir() . '/routes.php',
+			$this->getTestConfigDir() . '/routes.php',
+		], $this->extraRoutes));
 
 		foreach ($extraRoutes as $route) {
-			$routes->import($route);
+			if (file_exists($route)) {
+				$routes->import($route);
+			}
 		}
 
 		$routes
@@ -192,34 +193,25 @@ final class Kernel extends BaseKernel
 	): void {
 		// Load config for Test App
 		$loader->load($this->getTestPackagesConfigDir() . '/framework.php');
-		if ($builder->hasExtension('maker')) {
-			$loader->load($this->getTestPackagesConfigDir() . '/maker.php');
-		}
 
-		if ($builder->hasExtension('doctrine')) {
-			$loader->load($this->getTestPackagesConfigDir() . '/doctrine.php');
-		}
+		$config = [
+			'maker'                    => $this->getTestPackagesConfigDir() . '/maker.php',
+			'doctrine'                 => $this->getTestPackagesConfigDir() . '/doctrine.php',
+			'security'                 => $this->getTestPackagesConfigDir() . '/security.php',
+			'stof_doctrine_extensions' => $this->getTestPackagesConfigDir() . '/stof_doctrine_extensions.php',
+			// Load Fixtures and Factories of Bundle
+			$this->getTestConfigDir() . '/factories.php',
+			$this->getTestConfigDir() . '/fixtures.php',
+		];
 
-		if ($builder->hasExtension('stof_doctrine_extensions')) {
-			$loader->load($this->getTestPackagesConfigDir() . '/stof_doctrine_extensions.php');
-		}
-
-		if ($builder->hasExtension('security')) {
-			$loader->load($this->getTestPackagesConfigDir() . '/security.php');
+		foreach ($config as $extension => $file) {
+			if (is_numeric($extension) || $builder->hasExtension($extension)) {
+				$loader->load($file);
+			}
 		}
 
 		// Load service of Bundle
 		$loader->load($this->getTestConfigDir() . '/services.php');
-
-		// Load Fixtures and Factories of Bundle
-		$factories = $this->getTestConfigDir() . '/factories.php';
-		if (file_exists($factories)) {
-			$loader->load($factories);
-		}
-		$fixtures = $this->getTestConfigDir() . '/fixtures.php';
-		if (file_exists($fixtures)) {
-			$loader->load($fixtures);
-		}
 
 		foreach ($this->extraConfig as $extension => $config) {
 			if (is_array($config)) {
