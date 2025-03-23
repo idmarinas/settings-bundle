@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 22:11
+ * Last modified by "IDMarinas" on 23/03/2025, 21:06
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -28,7 +28,7 @@ return static function (FrameworkConfig $config) {
 		->httpMethodOverride(false)
 		->handleAllThrowables(true)
 	;
-	$config->form()->enabled(false);
+	$config->form()->enabled(true);
 	$config->propertyAccess()->enabled(true);
 	$config->phpErrors()->log(true);
 	$config->serializer()->enabled(true);
