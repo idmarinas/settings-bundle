@@ -1,0 +1,32 @@
+entity:
+  label:
+    setting:
+      plural: Ajustes
+      singular: Ajuste
+    setting_domain:
+      plural: Dominios
+      singular: Dominio
+
+crud:
+  form:
+    tab:
+      info: Información
+      translation: Traducción
+  common:
+    id: Identificador
+    name: Nombre
+    description: Descripción
+    deleted_at: Fecha borrado
+    created_at: Fecha creación
+    value: Valor
+    slug: Slug
+    priority_order: Orden de prioridad
+    enabled: Activo
+    read_only: Sólo lectura
+    translatable:
+      label: Traducible
+      help: |
+        El nombre y la descripción se convierten en traducibles haciendo que sean la clave para traducir el
+        nombre y la descripción.
+  setting:
+    domain: Dominio
