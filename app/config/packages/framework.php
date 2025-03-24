@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 23/03/2025, 21:06
+ * Last modified by "IDMarinas" on 23/03/2025, 21:14
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -32,4 +32,5 @@ return static function (FrameworkConfig $config) {
 	$config->propertyAccess()->enabled(true);
 	$config->phpErrors()->log(true);
 	$config->serializer()->enabled(true);
+	$config->assets()->enabled(true);
 };
