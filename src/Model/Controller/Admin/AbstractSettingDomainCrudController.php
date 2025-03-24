@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 24/03/2025, 19:02
+ * Last modified by "IDMarinas" on 24/03/2025, 19:17
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -20,9 +20,6 @@
 namespace Idm\Bundle\Settings\Model\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Option\SearchMode;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -43,17 +40,6 @@ abstract class AbstractSettingDomainCrudController extends AbstractCrudControlle
 		return parent::configureCrud($crud)
 			->setEntityLabelInSingular($t('entity.label.setting_domain.singular'))
 			->setEntityLabelInPlural($t('entity.label.setting_domain.plural'))
-			->setSearchFields(['name', 'description'])
-			->setSearchMode(SearchMode::ANY_TERMS)
-		;
-	}
-
-	public function configureFilters (Filters $filters): Filters
-	{
-		return parent::configureFilters($filters)
-			->add('name')
-			->add('description')
-			->add('slug')
 		;
 	}
 
