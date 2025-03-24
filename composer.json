@@ -47,6 +47,8 @@
 		"symfony/maker-bundle": "^1.61",
 		"symfony/runtime": "^6.4 | ^7.1",
 		"symfony/security-bundle": "^6.4 | ^7.1",
+		"twig/extra-bundle": "^3.20",
+		"twig/html-extra": "^3.20",
 		"zenstruck/foundry": "^2.3"
 	},
 	"autoload": {
