@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 23/03/2025, 21:14
+ * Last modified by "IDMarinas" on 24/03/2025, 17:24
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -28,7 +28,8 @@ return static function (FrameworkConfig $config) {
 		->httpMethodOverride(false)
 		->handleAllThrowables(true)
 	;
-	$config->form()->enabled(true);
+	$config->csrfProtection()->enabled(true);
+	$config->form()->enabled(true)->csrfProtection()->enabled(true);
 	$config->propertyAccess()->enabled(true);
 	$config->phpErrors()->log(true);
 	$config->serializer()->enabled(true);
