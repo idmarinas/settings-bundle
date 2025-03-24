@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 22/03/2025, 11:19
+ * Last modified by "IDMarinas" on 24/03/2025, 16:51
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -28,6 +28,7 @@ use Symfony\Bundle\MakerBundle\MakerBundle;
 use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\UX\TwigComponent\TwigComponentBundle;
+use Twig\Extra\TwigExtraBundle\TwigExtraBundle;
 use Zenstruck\Foundry\ZenstruckFoundryBundle;
 
 return [
@@ -36,6 +37,7 @@ return [
 	SecurityBundle::class               => ['all' => true],
 	TwigBundle::class                   => ['all' => true],
 	TwigComponentBundle::class          => ['all' => true],
+	TwigExtraBundle::class              => ['all' => true],
 	StofDoctrineExtensionsBundle::class => ['all' => true],
 	EasyAdminBundle::class              => ['all' => true],
 
