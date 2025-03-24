@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 18/03/2025, 17:30
+ * Last modified by "IDMarinas" on 24/03/2025, 18:22
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -45,11 +45,12 @@ return static function (ContainerConfigurator $container) {
 
 	$dbName = (new ReflectionClass(IdmSettingsBundle::class))->getShortName();
 	$dbName = u($dbName)->snake()->toString();
+	$env = $container->env() == 'dev' ? 'dev' : 'test';
 
 	$container->extension('doctrine', [
 		'dbal' => [
 			'driver'         => 'pdo_sqlite',
-			'url'            => sprintf('sqlite:///%s/%s_%s.sqlite', $getDatabaseCache(), $dbName, $container->env()),
+			'url'            => sprintf('sqlite:///%s/%s_%s.sqlite', $getDatabaseCache(), $dbName, $env),
 			'use_savepoints' => true,
 		],
 		'orm'  => [
