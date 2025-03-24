@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 23/03/2025, 21:09
+ * Last modified by "IDMarinas" on 24/03/2025, 17:26
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -193,12 +193,14 @@ final class Kernel extends BaseKernel
 	): void {
 		// Load config for Test App
 		$loader->load($this->getTestPackagesConfigDir() . '/framework.php');
+		$loader->load($this->getTestPackagesConfigDir() . '/framework/session.php');
 
 		$config = [
 			'maker'                    => $this->getTestPackagesConfigDir() . '/maker.php',
 			'doctrine'                 => $this->getTestPackagesConfigDir() . '/doctrine.php',
 			'security'                 => $this->getTestPackagesConfigDir() . '/security.php',
 			'stof_doctrine_extensions' => $this->getTestPackagesConfigDir() . '/stof_doctrine_extensions.php',
+			'twig_component'           => $this->getTestPackagesConfigDir() . '/twig_component.php',
 			// Load Fixtures and Factories of Bundle
 			$this->getTestConfigDir() . '/factories.php',
 			$this->getTestConfigDir() . '/fixtures.php',
