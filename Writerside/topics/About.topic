@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+	SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+	id="About"
+	title="About"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+>
+
+	<card-summary>Third-party libraries/bundles that have helped create %project%.</card-summary>
+
+	<note>
+		These other third-party libraries/bundles have been used to create %project%.
+	</note>
+
+	<deflist>
+		<def id="symfony-components" title="Symfony Components">
+			This project relies on these components for most of its features.
+		</def>
+		<def id="gedmo/doctrine-extensions" title="Doctrine Behavioral Extensions">
+			Provides functionalities for Doctrine such as <code>Blameable</code>, <code>Timestampable</code> and others
+		</def>
+	</deflist>
+
+	<seealso>
+		<category ref="external">
+			<a href="https://symfony.com/components">Symfony Components</a>
+			<a href="https://github.com/doctrine-extensions/DoctrineExtensions">Doctrine Behavioral Extensions</a>
+		</category>
+	</seealso>
+</topic>
