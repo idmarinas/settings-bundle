@@ -12,6 +12,7 @@ crud:
     tab:
       info: Información
       translation: Traducción
+      options: Opciones
   common:
     id: Identificador
     name: Nombre
