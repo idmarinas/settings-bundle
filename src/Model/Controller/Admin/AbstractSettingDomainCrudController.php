@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 23/03/2025, 19:38
+ * Last modified by "IDMarinas" on 24/03/2025, 19:02
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -41,8 +41,8 @@ abstract class AbstractSettingDomainCrudController extends AbstractCrudControlle
 		$t = fn(string $message) => t($message, [], 'IdmSettingsBundle');
 
 		return parent::configureCrud($crud)
-			->setEntityLabelInSingular($t('entity.label.setting.singular'))
-			->setEntityLabelInPlural($t('entity.label.setting.plural'))
+			->setEntityLabelInSingular($t('entity.label.setting_domain.singular'))
+			->setEntityLabelInPlural($t('entity.label.setting_domain.plural'))
 			->setSearchFields(['name', 'description'])
 			->setSearchMode(SearchMode::ANY_TERMS)
 		;
