@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 18:24
+ * Last modified by "IDMarinas" on 24/03/2025, 19:07
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -38,10 +38,6 @@ final class SettingFixtures extends Fixture
 	{
 		SettingFactory::createMany(100, ['domain' => SettingDomainFactory::random()]);
 
-		$domain = SettingDomainFactory::createOne(['name' => self::DOMAIN_TEST]);
-
-		SettingFactory::createMany(50, ['domain' => $domain]);
-
 		SettingFactory::createOne([
 			'name'   => self::SETTING_TEST . '_string',
 			'value'  => self::SETTING_TEST_STRING,
@@ -66,5 +62,9 @@ final class SettingFixtures extends Fixture
 			'type'   => SettingsEnum::BOOL,
 			'domain' => SettingDomainFactory::random(),
 		]);
+
+		$domain = SettingDomainFactory::createOne(['name' => self::DOMAIN_TEST]);
+
+		SettingFactory::createMany(50, ['domain' => $domain]);
 	}
 }
