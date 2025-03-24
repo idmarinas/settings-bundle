@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 21/03/2025, 24:12
+ * Last modified by "IDMarinas" on 24/03/2025, 19:12
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -35,6 +35,6 @@ enum SettingsKeysEnum: string
 	{
 		$key = $entityName . '.' . $name;
 
-		return ((new AsciiSlugger())->slug($key, '.'));
+		return (new AsciiSlugger())->slug($key, '.');
 	}
 }
