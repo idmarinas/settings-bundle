@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 21/03/2025, 21:32
+ * Last modified by "IDMarinas" on 25/03/2025, 20:10
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -35,7 +35,7 @@ use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 #[ORM\HasLifecycleCallbacks]
 class SettingUser extends AbstractSetting implements SettingsWithEntityInterface, UseEncryptCacheInterface
 {
-	public const string ENTITY_NAME = 'user_settings';
+	public const ENTITY_NAME = 'user_settings';
 
 	#[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'settings')]
 	protected ?User $entity = null;

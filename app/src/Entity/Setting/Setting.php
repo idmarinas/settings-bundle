@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 19/03/2025, 20:53
+ * Last modified by "IDMarinas" on 25/03/2025, 20:10
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -31,5 +31,5 @@ use Idm\Bundle\Settings\Model\Entity\AbstractSetting;
 #[ORM\HasLifecycleCallbacks]
 class Setting extends AbstractSetting
 {
-	public const string ENTITY_NAME = 'setting';
+	public const ENTITY_NAME = 'setting';
 }
