@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 22/03/2025, 12:31
+ * Last modified by "IDMarinas" on 25/03/2025, 20:03
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -25,10 +25,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 use Idm\Bundle\Settings\Traits\Entity\TranslatableSettingTrait;
+use Stringable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\MappedSuperclass()]
-abstract class AbstractSettingDomain
+abstract class AbstractSettingDomain implements Stringable
 {
 	use UuidTrait;
 	use TranslatableSettingTrait;
@@ -55,7 +56,7 @@ abstract class AbstractSettingDomain
 	#[Gedmo\Slug(fields: ['name'], separator: '.', prefix: 'domain.')]
 	protected string $slug;
 
-	public function __toString ()
+	public function __toString (): string
 	{
 		return $this->getName();
 	}

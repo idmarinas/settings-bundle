@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 20/03/2025, 18:05
+ * Last modified by "IDMarinas" on 25/03/2025, 20:02
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -65,13 +65,13 @@ final class IdmSettingsBundle extends AbstractBundle implements CompilerPassInte
 	{
 		$taggedServices = $container->findTaggedServiceIds('idm_settings.repository.settings');
 
-		foreach ($taggedServices as $id => $tags) {
+		foreach (array_keys($taggedServices) as $id) {
 			$container->findDefinition($id)->addMethodCall('setCache', [new Reference('idm_settings.cache')]);
 		}
 
 		$taggedServices = $container->findTaggedServiceIds('idm_settings.repository.settings.encrypt');
 
-		foreach ($taggedServices as $id => $tags) {
+		foreach (array_keys($taggedServices) as $id) {
 			$container->findDefinition($id)->addMethodCall('setCacheEncrypt', [new Reference('idm_settings.encrypt.cache')]);
 		}
 	}

@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 22/03/2025, 12:31
+ * Last modified by "IDMarinas" on 25/03/2025, 20:07
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -26,17 +26,18 @@ use Idm\Bundle\Common\Traits\Entity\UuidTrait;
 use Idm\Bundle\Settings\Enums\SettingsEnum;
 use Idm\Bundle\Settings\Enums\SettingsKeysEnum;
 use Idm\Bundle\Settings\Traits\Entity\TranslatableSettingTrait;
+use Stringable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\MappedSuperclass]
 #[ORM\HasLifecycleCallbacks]
-abstract class AbstractSetting
+abstract class AbstractSetting implements Stringable
 {
 	use UuidTrait;
 	use TranslatableSettingTrait;
 	use TimestampableEntity;
 
-	public const string ENTITY_NAME = 'default';
+	public const ENTITY_NAME = 'default';
 
 	#[ORM\Column(type: Types::STRING)]
 	#[Assert\Length(min: 3, max: 255)]
@@ -156,7 +157,7 @@ abstract class AbstractSetting
 	#[ORM\PreUpdate]
 	public function doGenerateSlug (): void
 	{
-		$this->setSlug(SettingsKeysEnum::slug(get_called_class()::ENTITY_NAME, $this->getName()));
+		$this->setSlug(SettingsKeysEnum::slug(static::class::ENTITY_NAME, $this->getName()));
 	}
 
 	public function getFormatedValue (): float|bool|int|string

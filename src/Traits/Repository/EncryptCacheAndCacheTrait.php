@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 21/03/2025, 21:30
+ * Last modified by "IDMarinas" on 25/03/2025, 20:02
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -26,11 +26,12 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 trait EncryptCacheAndCacheTrait
 {
 	private CacheItemPoolInterface&TagAwareCacheInterface $cacheEncrypt;
+
 	private CacheItemPoolInterface&TagAwareCacheInterface $cache;
 
 	public function getCache (?bool $encrypted = null): CacheItemPoolInterface&TagAwareCacheInterface
 	{
-		$encrypted = $encrypted ?? is_subclass_of($this->getEntityName(), UseEncryptCacheInterface::class);
+		$encrypted ??= is_subclass_of($this->getEntityName(), UseEncryptCacheInterface::class);
 
 		return $encrypted ? $this->cacheEncrypt : $this->cache;
 	}
