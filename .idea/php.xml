@@ -54,7 +54,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/config" />
       <path value="$PROJECT_DIR$/vendor/symfony/cache-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/cache" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
@@ -154,6 +153,7 @@
       <path value="$PROJECT_DIR$/vendor/twig/extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/asset" />
       <path value="$PROJECT_DIR$/vendor/symfony/intl" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php84" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
@@ -172,8 +172,8 @@
   <component name="PhpInterpretersPhpInfoCache">
     <phpInfoCache>
       <interpreter name="php-docker">
-        <phpinfo binary_type="PHP" php_cli="/usr/local/bin/php" path_separator=":" version="8.3.17">
-          <additional_php_ini>/usr/local/etc/php/conf.d/00_disable_functions.ini, /usr/local/etc/php/conf.d/00_opcache.ini, /usr/local/etc/php/conf.d/01_opcache.ini, /usr/local/etc/php/conf.d/01_php.ini, /usr/local/etc/php/conf.d/docker-fpm.ini, /usr/local/etc/php/conf.d/docker-php-ext-bcmath.ini, /usr/local/etc/php/conf.d/docker-php-ext-exif.ini, /usr/local/etc/php/conf.d/docker-php-ext-gd.ini, /usr/local/etc/php/conf.d/docker-php-ext-intl.ini, /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini, /usr/local/etc/php/conf.d/docker-php-ext-pcntl.ini, /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini, /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini, /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini, /usr/local/etc/php/conf.d/docker-php-ext-xsl.ini, /usr/local/etc/php/conf.d/docker-php-ext-zip.ini</additional_php_ini>
+        <phpinfo binary_type="PHP" php_cli="/usr/local/bin/php" path_separator=":" version="8.2.28">
+          <additional_php_ini>/usr/local/etc/php/conf.d/00_disable_functions.ini, /usr/local/etc/php/conf.d/00_opcache.ini, /usr/local/etc/php/conf.d/01_opcache.ini, /usr/local/etc/php/conf.d/01_php.ini, /usr/local/etc/php/conf.d/docker-fpm.ini, /usr/local/etc/php/conf.d/docker-php-ext-bcmath.ini, /usr/local/etc/php/conf.d/docker-php-ext-gd.ini, /usr/local/etc/php/conf.d/docker-php-ext-intl.ini, /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini, /usr/local/etc/php/conf.d/docker-php-ext-pdo_mysql.ini, /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini, /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini, /usr/local/etc/php/conf.d/docker-php-ext-zip.ini</additional_php_ini>
           <configuration_file>/usr/local/etc/php/php.ini</configuration_file>
           <configuration_options>
             <configuration_option name="include_path" value=".:/usr/local/lib/php" />
@@ -196,7 +196,6 @@
             <extension name="curl" />
             <extension name="date" />
             <extension name="dom" />
-            <extension name="exif" />
             <extension name="fileinfo" />
             <extension name="filter" />
             <extension name="gd" />
@@ -208,7 +207,6 @@
             <extension name="mbstring" />
             <extension name="mysqlnd" />
             <extension name="openssl" />
-            <extension name="pcntl" />
             <extension name="pcre" />
             <extension name="pdo_mysql" />
             <extension name="pdo_sqlite" />
@@ -224,7 +222,6 @@
             <extension name="xml" />
             <extension name="xmlreader" />
             <extension name="xmlwriter" />
-            <extension name="xsl" />
             <extension name="zip" />
             <extension name="zlib" />
           </loaded_extensions>
@@ -232,7 +229,7 @@
       </interpreter>
     </phpInfoCache>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
   <component name="PhpRuntimeConfiguration">
     <extensions>
       <extension name="Ev" enabled="false" />
@@ -254,6 +251,7 @@
       <extension name="dio" enabled="false" />
       <extension name="elastic_apm" enabled="false" />
       <extension name="enchant" enabled="false" />
+      <extension name="exif" enabled="false" />
       <extension name="fann" enabled="false" />
       <extension name="ffmpeg" enabled="false" />
       <extension name="frankenphp" enabled="false" />
@@ -296,6 +294,7 @@
       <extension name="oci8" enabled="false" />
       <extension name="odbc" enabled="false" />
       <extension name="opentelemetry" enabled="false" />
+      <extension name="pcntl" enabled="false" />
       <extension name="pdflib" enabled="false" />
       <extension name="pgsql" enabled="false" />
       <extension name="pspell" enabled="false" />
@@ -326,6 +325,7 @@
       <extension name="xhprof" enabled="false" />
       <extension name="xlswriter" enabled="false" />
       <extension name="xmlrpc" enabled="false" />
+      <extension name="xsl" enabled="false" />
       <extension name="yaml" enabled="false" />
       <extension name="zend" enabled="false" />
       <extension name="zmq" enabled="false" />
