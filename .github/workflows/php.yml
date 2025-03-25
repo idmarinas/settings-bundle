@@ -34,7 +34,7 @@ jobs:
     name: PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}
     strategy:
       matrix:
-        php: [ '8.2', '5.3', '8.4' ]
+        php: [ '8.2', '8.3', '8.4' ]
         symfony: [ '6.4.*', '7.1.*', '7.2.*' ]
 
     steps:
