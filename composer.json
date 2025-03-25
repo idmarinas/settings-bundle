@@ -24,7 +24,7 @@
 	"minimum-stability": "stable",
 	"prefer-stable": true,
 	"require": {
-		"php": "^8.3",
+		"php": "^8.2",
 		"ext-sodium": "*",
 		"doctrine/doctrine-bundle": "^2.13",
 		"gedmo/doctrine-extensions": "^3.19",

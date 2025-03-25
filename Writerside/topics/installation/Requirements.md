@@ -5,7 +5,7 @@
 
 | **%project%** | **PHP Version** | **Symfony Version** | **Status**                 |
 |---------------|:---------------:|:-------------------:|----------------------------|
-| `1.x`         |     `^8.3`      |  `6.4` and `^7.1`   | New features and bug fixes |
+| `1.x`         |     `^8.2`      |  `6.4` and `^7.1`   | New features and bug fixes |
 
 <seealso>
   <category ref="related">
