@@ -3,7 +3,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 17/03/2025, 15:35
+ * Last modified by "IDMarinas" on 25/03/2025, 19:59
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -35,7 +35,7 @@ final class BundleConfigurationTest extends KernelTestCase
 
 		// Boot the kernel.
 		self::bootKernel([
-			'config' => static function (Kernel $kernel) {
+			'config' => static function (Kernel $kernel): void {
 				$kernel->addExtraConfig([
 					'idm_settings' => [
 						'cache_keypair' => 'invalid_key',

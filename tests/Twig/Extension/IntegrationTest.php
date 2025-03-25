@@ -2,7 +2,7 @@
 /**
  * Copyright 2021-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 14/03/2025, 23:26
+ * Last modified by "IDMarinas" on 25/03/2025, 20:00
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -30,12 +30,12 @@ use Twig\Test\IntegrationTestCase;
  */
 final class IntegrationTest extends IntegrationTestCase
 {
-	public static function getFixturesDirectory (): string
+	protected static function getFixturesDirectory (): string
 	{
 		return __DIR__ . '/Fixtures/';
 	}
 
-	public function getExtensions (): array
+	protected function getExtensions (): array
 	{
 		return [];
 	}
