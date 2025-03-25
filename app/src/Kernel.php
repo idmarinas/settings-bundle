@@ -2,7 +2,7 @@
 /**
  * Copyright 2024-2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 24/03/2025, 17:26
+ * Last modified by "IDMarinas" on 25/03/2025, 20:01
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -33,11 +33,15 @@ final class Kernel extends BaseKernel
 {
 	use MicroKernelTrait;
 
-	private array  $extraBundles    = [];
-	private array  $extraRoutes     = [];
-	private array  $extraConfig     = [];
+	private array $extraBundles = [];
+
+	private array $extraRoutes = [];
+
+	private array $extraConfig = [];
+
 	private string $testCachePrefix = '';
-	private bool   $clearCache      = true;
+
+	private bool $clearCache = true;
 
 	public function __construct (string $environment, bool $debug)
 	{
