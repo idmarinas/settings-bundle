@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 14/03/2025, 22:59
+ * Last modified by "IDMarinas" on 25/03/2025, 19:56
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -30,7 +30,7 @@ return RectorConfig::configure()
 		__DIR__ . '/src',
 		__DIR__ . '/tests',
 	])
-	->withPhpSets(php83: true)
+	->withPhpSets(php82: true)
 	->withPreparedSets(
 		deadCode           : true,
 		codeQuality        : true,
