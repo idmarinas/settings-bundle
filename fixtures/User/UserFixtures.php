@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 21/03/2025, 24:09
+ * Last modified by "IDMarinas" on 25/03/2025, 20:06
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -28,15 +28,15 @@ use ReflectionException;
 
 final class UserFixtures extends Fixture
 {
-	public const string USER_TEST_EMAIL = 'jonny.doe@example.com';
+	public const USER_TEST_EMAIL = 'jonny.doe@example.com';
 
-	public const string USER_ADMIN_EMAIL = 'john.doe@example.com';
+	public const USER_ADMIN_EMAIL = 'john.doe@example.com';
 
-	public const string USER_EMAIL = 'jane.doe@example.com';
+	public const USER_EMAIL = 'jane.doe@example.com';
 
-	public const string KEY_USER = 'normal_user_';
+	public const KEY_USER = 'normal_user_';
 
-	public const string USER_PASS = 'pass_1234_$%';
+	public const USER_PASS = 'pass_1234_$%';
 
 	/**
 	 * @throws ReflectionException

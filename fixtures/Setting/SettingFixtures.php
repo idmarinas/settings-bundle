@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 24/03/2025, 19:07
+ * Last modified by "IDMarinas" on 25/03/2025, 20:04
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -27,12 +27,17 @@ use Idm\Bundle\Settings\Enums\SettingsEnum;
 
 final class SettingFixtures extends Fixture
 {
-	public const string  SETTING_TEST        = 'setting_test';
-	public const string  DOMAIN_TEST         = 'domain_test';
-	public const string  SETTING_TEST_STRING = 'setting_test_string';
-	public const int     SETTING_TEST_INT    = 500;
-	public const float   SETTING_TEST_FLOAT  = 45.36;
-	public const bool    SETTING_TEST_BOOL   = true;
+	public const SETTING_TEST = 'setting_test';
+
+	public const DOMAIN_TEST = 'domain_test';
+
+	public const SETTING_TEST_STRING = 'setting_test_string';
+
+	public const SETTING_TEST_INT = 500;
+
+	public const SETTING_TEST_FLOAT = 45.36;
+
+	public const SETTING_TEST_BOOL = true;
 
 	public function load (ObjectManager $manager): void
 	{
