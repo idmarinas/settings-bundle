@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 24/03/2025, 23:10
+ * Last modified by "IDMarinas" on 27/03/2025, 18:33
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -47,7 +47,7 @@ abstract class AbstractSettingDomainCrudController extends AbstractSettingCrudCo
 		}
 
 		yield FormField::addTab($t('crud.form.tab.options'), 'fa fa-info');
-		yield BooleanField::new('enabled', $t('entity.common.enabled'));
-		yield BooleanField::new('readOnly', $t('entity.common.read_only'));
+		yield BooleanField::new('enabled', $t('crud.common.enabled'));
+		yield BooleanField::new('readOnly', $t('crud.common.read_only'));
 	}
 }

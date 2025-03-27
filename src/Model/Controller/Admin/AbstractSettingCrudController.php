@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 24/03/2025, 23:11
+ * Last modified by "IDMarinas" on 27/03/2025, 18:32
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -60,17 +60,17 @@ abstract class AbstractSettingCrudController extends AbstractCrudController
 		$t = fn(string $message) => t($message, [], 'IdmSettingsBundle');
 
 		yield FormField::addTab($t('crud.form.tab.translation'), 'fa fa-language');
-		yield BooleanField::new('translatable', $t('entity.common.translatable.label'))
-			->setHelp($t('entity.common.translatable.help'))
+		yield BooleanField::new('translatable', $t('crud.common.translatable.label'))
+			->setHelp($t('crud.common.translatable.help'))
 		;
-		yield TextField::new('translationDomain', $t('entity.common.translation_domain'))->hideOnIndex();
+		yield TextField::new('translationDomain', $t('crud.common.translation_domain'))->hideOnIndex();
 
 		yield FormField::addTab($t('crud.form.tab.info'), 'fa fa-info');
-		yield IdField::new('id', $t('entity.common.id'))->onlyOnDetail();
-		yield TextField::new('name', $t('entity.common.name'));
-		yield TextareaField::new('description', $t('entity.common.description'))->hideOnIndex();
-		yield 'domain' => AssociationField::new('domain', $t('entity.setting.domain'));
-		yield IntegerField::new('priorityOrder', $t('entity.common.priority_order'));
-		yield TextField::new('slug', $t('entity.common.slug'))->onlyOnDetail();
+		yield IdField::new('id', $t('crud.common.id'))->onlyOnDetail();
+		yield TextField::new('name', $t('crud.common.name'));
+		yield TextareaField::new('description', $t('crud.common.description'))->hideOnIndex();
+		yield 'domain' => AssociationField::new('domain', $t('crud.setting.domain'));
+		yield IntegerField::new('priorityOrder', $t('crud.common.priority_order'));
+		yield TextField::new('slug', $t('crud.common.slug'))->onlyOnDetail();
 	}
 }
