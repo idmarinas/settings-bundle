@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2 - (2025-03-27)
+
+### Added {id="added_1.0.1"}
+
+* _Added_ missing translation key for `translation_domain`
+
 ## 1.0.1 - (2025-03-27)
 
 ### Fixed
