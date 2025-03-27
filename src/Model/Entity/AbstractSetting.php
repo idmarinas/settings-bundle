@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 25/03/2025, 20:07
+ * Last modified by "IDMarinas" on 27/03/2025, 16:26
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -43,7 +43,7 @@ abstract class AbstractSetting implements Stringable
 	#[Assert\Length(min: 3, max: 255)]
 	protected ?string $name = null;
 
-	#[ORM\ManyToOne(targetEntity: AbstractSettingDomain::class, inversedBy: 'settings')]
+	#[ORM\ManyToOne(targetEntity: AbstractSettingDomain::class)]
 	#[ORM\JoinColumn(nullable: false)]
 	protected ?AbstractSettingDomain $domain = null;
 
