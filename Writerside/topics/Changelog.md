@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 - (2025-03-27)
+
+### Fixed
+
+* _Fixed_ error on `AbstractSetting`: The association `Setting#domain` refers to the inverse side field
+  `SettingDomain#settings` which does not exist.
+* Fixed error with key of translations in `CrudController`
+
 ## 1.0.0 - (2025-03-25)
 
 ## Release highlights
