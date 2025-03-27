@@ -24,6 +24,7 @@ crud:
     priority_order: Orden de prioridad
     enabled: Active
     read_only: Read only
+    translation_domain: Translation Domain
     translatable:
       label: Translatable
       help: |
