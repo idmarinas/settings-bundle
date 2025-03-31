@@ -1,8 +1,21 @@
 # Changelog
 
+## 1.1.0 - (2025-03-31)
+
+### Added {id="added_1.1.0"}
+
+* _Added_ translation keys for `SettingsEnum` `enum.setting.type.[int|float|bool|string]`
+* _Added_ trait `TranslatableChoicesEnumTrait` to `SettingsEnum`
+* Added missing fields `type` and `value` in `AbstractSettingsCrudController`
+
+### Changed
+
+* Changed method `configureFields()` of `AbstractSettingCrudController` and `AbstractSettingDomainCrudController` now
+  return values with keys. **key is the field name in _snake_case_**
+
 ## 1.0.2 - (2025-03-27)
 
-### Added {id="added_1.0.1"}
+### Added {id="added_1.0.2"}
 
 * _Added_ missing translation key for `translation_domain`
 
