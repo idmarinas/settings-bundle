@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 16/03/2025, 18:30
+ * Last modified by "IDMarinas" on 31/03/2025, 17:17
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -20,10 +20,12 @@
 namespace Idm\Bundle\Settings\Enums;
 
 use Idm\Bundle\Common\Traits\Enums\EnumToArrayTrait;
+use Idm\Bundle\User\Enums\TranslatableChoicesEnumTrait;
 
 enum SettingsEnum: string
 {
 	use EnumToArrayTrait;
+	use TranslatableChoicesEnumTrait;
 
 	case STRING = 'string';
 	case BOOL   = 'bool';
