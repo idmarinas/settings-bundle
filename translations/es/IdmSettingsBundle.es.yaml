@@ -32,3 +32,11 @@ crud:
         nombre y la descripción.
   setting:
     domain: Dominio
+    type: Tipo
+
+enum.setting.type:
+  # Enums Settings
+  int: Entero
+  float: Decimal
+  bool: Booleano
+  string: Texto

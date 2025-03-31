@@ -31,3 +31,10 @@ crud:
         The name and description become translatable making them the key to translate the name and description.
   setting:
     domain: Domain
+
+enum.setting.type:
+  # Enums Settings
+  int: Int
+  float: Float
+  bool: Bool
+  string: String
