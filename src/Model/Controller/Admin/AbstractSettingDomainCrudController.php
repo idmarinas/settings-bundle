@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 27/03/2025, 18:33
+ * Last modified by "IDMarinas" on 31/03/2025, 17:20
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -21,7 +21,6 @@ namespace Idm\Bundle\Settings\Model\Controller\Admin;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use function Symfony\Component\Translation\t;
 
 abstract class AbstractSettingDomainCrudController extends AbstractSettingCrudController
@@ -40,13 +39,11 @@ abstract class AbstractSettingDomainCrudController extends AbstractSettingCrudCo
 	{
 		$t = fn(string $message) => t($message, [], 'IdmSettingsBundle');
 
-		foreach (parent::configureFields($pageName) as $key => $field) {
-			if ('domain' !== $key) {
-				yield $field;
-			}
-		}
+		$fields = iterator_to_array(parent::configureFields($pageName));
 
-		yield FormField::addTab($t('crud.form.tab.options'), 'fa fa-info');
+		unset($fields['domain'], $fields['type'], $fields['value']);
+
+		yield from $fields;
 		yield BooleanField::new('enabled', $t('crud.common.enabled'));
 		yield BooleanField::new('readOnly', $t('crud.common.read_only'));
 	}
