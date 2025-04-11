@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 31/03/2025, 17:20
+ * Last modified by "IDMarinas" on 11/04/2025, 22:04
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -19,7 +19,6 @@
 
 namespace Idm\Bundle\Settings\Model\Controller\Admin;
 
-use Admin\Util\EnumUtils;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Option\SearchMode;
@@ -76,10 +75,9 @@ abstract class AbstractSettingCrudController extends AbstractCrudController
 
 		yield 'type' => ChoiceField::new('type', $t('crud.setting.type'))
 			->renderAsBadges()
-			->setFormTypeOption('choice_value', fn($value) => is_string($value) ? $value : $value->value)
-			->setTranslatableChoices(
-				SettingsEnum::toTranslatableChoices('enum.setting.type.', domain: 'IdmSettingsBundle')
-			)
+			->formatValue(fn($value) => t('enum.setting.type.' . $value->value, domain: 'IdmSettingsBundle'))
+			->setFormTypeOption('choice_value', fn($value) => is_string($value) ? $value : $value->name)
+			->setTranslatableChoices(SettingsEnum::toTranslatableChoices('enum.setting.type.', domain: 'IdmSettingsBundle'))
 		;
 		yield 'value' => TextField::new('value', $t('crud.common.value'))->hideOnIndex();
 	}
