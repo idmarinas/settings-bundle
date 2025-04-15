@@ -2,7 +2,7 @@
 /**
  * Copyright 2025 (C) IDMarinas - All Rights Reserved
  *
- * Last modified by "IDMarinas" on 31/03/2025, 17:17
+ * Last modified by "IDMarinas" on 14/04/2025, 21:22
  *
  * @project IDMarinas Settings Bundle
  * @see     https://github.com/idmarinas/settings-bundle
@@ -20,12 +20,12 @@
 namespace Idm\Bundle\Settings\Enums;
 
 use Idm\Bundle\Common\Traits\Enums\EnumToArrayTrait;
-use Idm\Bundle\User\Enums\TranslatableChoicesEnumTrait;
+use Symfony\Contracts\Translation\TranslatableInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-enum SettingsEnum: string
+enum SettingsEnum: string implements TranslatableInterface
 {
 	use EnumToArrayTrait;
-	use TranslatableChoicesEnumTrait;
 
 	case STRING = 'string';
 	case BOOL   = 'bool';
@@ -40,5 +40,12 @@ enum SettingsEnum: string
 			self::FLOAT => (float)$value,
 			default     => (string)$value, // Default is string
 		};
+	}
+
+	public function trans (TranslatorInterface $translator, ?string $locale = null): string
+	{
+		$key = 'enum.setting.type.' . strtolower($this->name);
+
+		return $translator->trans($key, domain: 'IdmSettingsBundle', locale: $locale);
 	}
 }
