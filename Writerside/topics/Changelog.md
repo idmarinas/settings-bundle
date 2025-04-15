@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.0 - (2025-04-11)
+
+### Changed {id="changed_1"}
+
+* _Changed_ `ChoiceType` form to `EnumType` form type in `AbstractSettingCrudController`
+
+### Added {id="added_1"}
+
+* _Added_ `trans` method to `SettingsEnum` for translation all key. Used by `EnumType`
+* Added missing keys of fields **read_only, enabled** for `configureFields` method in
+  `AbstractSettingDomainCrudController`,
+
+## Deleted
+
+* _Deleted_ trait `TranslatableChoicesEnumTrait` from `SettingsEnum`
+
 ## 1.1.0 - (2025-03-31)
 
 ### Added {id="added_1.1.0"}
